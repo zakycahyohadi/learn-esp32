@@ -1,5 +1,7 @@
 # ESP32 Lab 3D
 
+[![Preview of the ESP32 learning site: breadboard simulator on a laptop and 3D pinout on a phone](docs/preview.png)](https://zakycahyohadi.github.io/learn-esp32/)
+
 **Learn the ESP32 in your browser — no board, no wiring kit, no install.**
 
 👉 **Open it here: https://zakycahyohadi.github.io/learn-esp32/**
