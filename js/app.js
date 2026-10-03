@@ -9,6 +9,10 @@
    File diambil dengan fetch(), jadi halaman harus dibuka lewat server (GitHub Pages atau
    `python3 -m http.server`), bukan dengan klik dua kali file index.html. */
 (async function(){
+  // versi file: "dev" di komputer, diganti kode commit saat deploy (.github/workflows/pages.yml)
+  // supaya browser selalu mengambil file terbaru setelah update, bukan campuran file lama dan baru
+  var V=((document.currentScript&&document.currentScript.src.match(/[?&]v=([^&#]+)/))||[])[1]||'dev';
+  var Q='?v='+V;
   var get=function(k){try{return localStorage.getItem(k);}catch(e){return null;}};
   var set=function(k,v){try{localStorage.setItem(k,v);}catch(e){}};
   var lang=get('esp32lab-lang');
@@ -41,14 +45,14 @@
   function frag(html){var t=document.createElement('template');t.innerHTML=html;return t.content;}
   // isi halaman + kode contoh sebagai <script type="text/plain" id="code-..."> (dibaca codeOf() di main.js)
   async function page(l){
-    var res=await Promise.all([load('lang/'+l+'/main.html')].concat(EXAMPLES.map(function(n){return load('examples/'+l+'/'+n+'.ino');})));
+    var res=await Promise.all([load('lang/'+l+'/main.html'+Q)].concat(EXAMPLES.map(function(n){return load('examples/'+l+'/'+n+'.ino'+Q);})));
     var f=frag(res[0]);
     EXAMPLES.forEach(function(n,i){var s=document.createElement('script');s.type='text/plain';s.id='code-'+n;s.textContent='\n'+res[i+1];f.appendChild(s);});
     return f;
   }
   var alt,simHtml={};
   // semua file diunduh paralel, tapi bahasa aktif langsung ditempel begitu siap supaya teks cepat tampil
-  var pCur=page(lang),pRest=Promise.all([page(other(lang)),load('lang/id/sim.html'),load('lang/en/sim.html')]);
+  var pCur=page(lang),pRest=Promise.all([page(other(lang)),load('lang/id/sim.html'+Q),load('lang/en/sim.html'+Q)]);
   pRest.catch(function(){});
   try{
     root.appendChild(await pCur);
@@ -78,7 +82,7 @@
   // beri browser kesempatan menggambar teks dulu, baru tunggu three.js dan jalankan main.js
   await new Promise(function(ok){requestAnimationFrame(function(){setTimeout(ok,0);});});
   await three3d;
-  await loadScript('js/main.js');
+  await loadScript('js/main.js'+Q);
 
   var view='main',frame=null;
   function els(){return [root.querySelector('header.hero'),root.querySelector('main'),root.querySelector('footer')];}
@@ -93,12 +97,12 @@
       var l=API.lang,T='<scr'+'ipt';
       frame=document.createElement('iframe');frame.title=l==='en'?'ESP32 simulator':'Simulator ESP32';
       frame.addEventListener('load',syncTheme);
-      frame.srcdoc='<!doctype html><html lang="'+l+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ESP32 Simulator</title><link rel="stylesheet" href="css/sim.css"></head><body>'
+      frame.srcdoc='<!doctype html><html lang="'+l+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ESP32 Simulator</title><link rel="stylesheet" href="css/sim.css'+Q+'"></head><body>'
         +simHtml[l]
         +'<template id="alt-static">'+simHtml[other(l)]+'</template>'
         +T+' src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></scr'+'ipt>'
         +T+' src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></scr'+'ipt>'
-        +T+' src="js/sim.js"></scr'+'ipt></body></html>';
+        +T+' src="js/sim.js'+Q+'"></scr'+'ipt></body></html>';
       box.appendChild(frame);}
     if(sim){window.scrollTo(0,0);if(location.hash!=='#simulator')history.replaceState(null,'','#simulator');}
     else if(location.hash==='#simulator')history.replaceState(null,'',location.pathname+location.search);

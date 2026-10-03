@@ -2149,6 +2149,8 @@ function initSim(){
     if(e.key==='Escape'){cancelWire();select(null);}
     else if((e.key==='Delete'||e.key==='Backspace')&&S.sel){e.preventDefault();delSel();}
     else if((e.key==='r'||e.key==='R')&&S.sel&&S.sel.P)rotateSel();});
+  // Backspace di luar kolom ketik jangan sampai dianggap tombol "Kembali" browser: rakitan dan kode bisa hilang
+  window.addEventListener('keydown',e=>{if(e.key==='Backspace'&&!(e.target&&e.target.closest&&e.target.closest('input,textarea,select,[contenteditable]')))e.preventDefault();});
   window.__simKey=k=>{const ev=new KeyboardEvent('keydown',{key:k,cancelable:true});window.dispatchEvent(ev);return ev.defaultPrevented;};
 
   /* bilah aksi untuk yang sedang dipilih */
