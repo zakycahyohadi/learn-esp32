@@ -26,14 +26,11 @@
       <div class="eyebrow">Modul belajar interaktif · ESP32 DevKit V1</div>
       <h1 style="margin-top:12px">Belajar ESP32 sambil memutar, mengklik, dan menyalakannya.</h1>
       <p class="lede">Kamu sudah kenal Arduino. ESP32 diprogram dengan cara yang sama, tapi punya WiFi, Bluetooth, dan tenaga jauh lebih besar. Mulai dari board 3D di bawah, pahami cara kerjanya, lalu rakit dan jalankan rangkaianmu sendiri di simulator.</p>
-      <div class="specs">
-        <span class="spec"><b>240 MHz</b> · 2 core</span>
-        <span class="spec"><b>520 KB</b> SRAM</span>
-        <span class="spec"><b>WiFi</b> 2.4 GHz</span>
-        <span class="spec"><b>Bluetooth</b> 4.2 + BLE</span>
-        <span class="spec">Logika <b>3.3 V</b></span>
-        <span class="spec">ADC <b>12-bit</b></span>
+      <div class="hero-cta">
+        <a class="btn accent lg" href="#simulator">▶ Coba simulator</a>
+        <a class="btn ghost lg" href="#project">Lihat 11 project</a>
       </div>
+      <p class="hero-note">Gratis · tanpa install · tanpa daftar · jalan di HP dan laptop</p>
     </div>
     <div class="hero-nav">
       <a href="#pinout"><span class="k">01</span><span class="t">Bongkar board-nya</span><span class="s">Klik tiap pin, lihat fungsinya</span><span class="arr">↓</span></a>
@@ -45,6 +42,24 @@
 </header>
 
 <main>
+<section id="fitur" class="feat-band">
+  <div class="wrap">
+  <div class="feat">
+    <div class="feat-head">
+      <div class="eyebrow">Simulator</div>
+      <h2>Rakit dan uji rangkaian tanpa alat asli</h2>
+      <p>Pasang komponen, tarik kabel, tulis kode Arduino, lalu jalankan. Semuanya di browser.</p>
+      <a class="btn accent lg" href="#simulator">▶ Buka simulator</a>
+    </div>
+    <ul class="feat-list">
+        <li><b>Breadboard 3D dan 2D</b><span>15 komponen: LED, tombol, sensor, servo, motor DC, relay, dan lainnya. Tarik kabel dari titik ke titik.</span></li>
+        <li><b>Kode Arduino sungguhan</b><span>Tulis sketch, tekan Jalankan, lalu lihat hasilnya di board dan Serial Monitor.</span></li>
+        <li><b>Dihitung secara listrik</b><span>Kabel yang salah membuat alat tidak jalan, LED tanpa resistor bisa rusak. Ada multimeter dan pemeriksa rangkaian.</span></li>
+        <li><b>9 pelajaran dari nol</b><span>Tiap langkah dicek otomatis, lengkap dengan petunjuk dan jawaban, sampai bisa membuat mobil robot.</span></li>
+    </ul>
+  </div>
+  </div>
+</section>
 <section id="pinout">
   <div class="wrap">
     <div class="sec-head">
@@ -68,13 +83,13 @@
         <div class="panel pin-card" id="pinCard" aria-live="polite"></div>
       </aside>
     </div>
-    <div class="panel" style="margin-top:16px">
-      <div class="small-label">Semua pin, urut dari ujung antena ke ujung USB</div>
+    <details class="panel pin-all" id="pinAll" style="margin-top:16px">
+      <summary class="small-label">Semua pin, urut dari ujung antena ke ujung USB</summary>
       <div class="pinlist">
         <div><div class="small-label" style="color:var(--fg)">Sisi EN</div><ol id="pinListL"></ol></div>
         <div><div class="small-label" style="color:var(--fg)">Sisi D23</div><ol id="pinListR"></ol></div>
       </div>
-    </div>
+    </details>
   </div>
 </section>
 
@@ -302,5 +317,5 @@ ledcWrite(18, 77);</pre>
 <section id="simView" class="sim-view" hidden aria-label="Simulator"></section>
 
 <footer>
-  <div class="wrap">Simulasi di halaman ini menyederhanakan dunia nyata: nilai sensor, waktu, dan perilaku modul bisa sedikit berbeda di board asli. Selalu cek datasheet modul yang kamu pakai. <a href="#saran">Punya saran? Kirim di sini</a></div>
+  <div class="wrap">Simulasi di halaman ini menyederhanakan dunia nyata: nilai sensor, waktu, dan perilaku modul bisa sedikit berbeda di board asli. Selalu cek datasheet modul yang kamu pakai. <a href="#saran">Punya saran? Kirim di sini</a> · <a href="https://github.com/zakycahyohadi/learn-esp32">Kode sumber di GitHub</a></div>
 </footer>

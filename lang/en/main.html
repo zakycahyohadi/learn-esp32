@@ -26,14 +26,11 @@
       <div class="eyebrow">Interactive learning module · ESP32 DevKit V1</div>
       <h1 style="margin-top:12px">Learn the ESP32 by spinning it, clicking it, and switching it on.</h1>
       <p class="lede">You already know Arduino. The ESP32 is programmed the same way, but it has WiFi, Bluetooth, and far more power. Start with the 3D board below, see how it works, then build and run your own circuits in the simulator.</p>
-      <div class="specs">
-        <span class="spec"><b>240 MHz</b> · 2 core</span>
-        <span class="spec"><b>520 KB</b> SRAM</span>
-        <span class="spec"><b>WiFi</b> 2.4 GHz</span>
-        <span class="spec"><b>Bluetooth</b> 4.2 + BLE</span>
-        <span class="spec">Logic <b>3.3 V</b></span>
-        <span class="spec">ADC <b>12-bit</b></span>
+      <div class="hero-cta">
+        <a class="btn accent lg" href="#simulator">▶ Try the simulator</a>
+        <a class="btn ghost lg" href="#project">See the 11 projects</a>
       </div>
+      <p class="hero-note">Free · no install · no sign-up · works on phone and laptop</p>
     </div>
     <div class="hero-nav">
       <a href="#pinout"><span class="k">01</span><span class="t">Take the board apart</span><span class="s">Click any pin to see what it does</span><span class="arr">↓</span></a>
@@ -45,6 +42,24 @@
 </header>
 
 <main>
+<section id="fitur" class="feat-band">
+  <div class="wrap">
+  <div class="feat">
+    <div class="feat-head">
+      <div class="eyebrow">Simulator</div>
+      <h2>Build and test circuits without real parts</h2>
+      <p>Place parts, draw wires, write Arduino code, then run it. All in your browser.</p>
+      <a class="btn accent lg" href="#simulator">▶ Open the simulator</a>
+    </div>
+    <ul class="feat-list">
+        <li><b>3D and 2D breadboard</b><span>15 parts: LEDs, buttons, sensors, a servo, DC motors, a relay, and more. Draw wires from point to point.</span></li>
+        <li><b>Real Arduino code</b><span>Write a sketch, press Run, then watch the result on the board and in the Serial Monitor.</span></li>
+        <li><b>Electrically simulated</b><span>A wrong wire stops the device from working, and an LED without a resistor can burn out. Includes a multimeter and a circuit checker.</span></li>
+        <li><b>9 lessons from zero</b><span>Every step is checked automatically, with hints and answers, all the way to a robot car.</span></li>
+    </ul>
+  </div>
+  </div>
+</section>
 <section id="pinout">
   <div class="wrap">
     <div class="sec-head">
@@ -68,13 +83,13 @@
         <div class="panel pin-card" id="pinCard" aria-live="polite"></div>
       </aside>
     </div>
-    <div class="panel" style="margin-top:16px">
-      <div class="small-label">All pins, from the antenna end to the USB end</div>
+    <details class="panel pin-all" id="pinAll" style="margin-top:16px">
+      <summary class="small-label">All pins, from the antenna end to the USB end</summary>
       <div class="pinlist">
         <div><div class="small-label" style="color:var(--fg)">EN side</div><ol id="pinListL"></ol></div>
         <div><div class="small-label" style="color:var(--fg)">D23 side</div><ol id="pinListR"></ol></div>
       </div>
-    </div>
+    </details>
   </div>
 </section>
 
@@ -302,5 +317,5 @@ ledcWrite(18, 77);</pre>
 <section id="simView" class="sim-view" hidden aria-label="Simulator"></section>
 
 <footer>
-  <div class="wrap">The simulations on this page simplify the real world: sensor values, timing, and module behaviour can differ a little on real hardware. Always check the datasheet of the module you use. <a href="#saran">Have a suggestion? Send it here</a></div>
+  <div class="wrap">The simulations on this page simplify the real world: sensor values, timing, and module behaviour can differ a little on real hardware. Always check the datasheet of the module you use. <a href="#saran">Have a suggestion? Send it here</a> · <a href="https://github.com/zakycahyohadi/learn-esp32">Source code on GitHub</a></div>
 </footer>

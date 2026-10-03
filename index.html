@@ -7,8 +7,9 @@
 <meta name="description" content="Belajar ESP32 secara interaktif: pinout 3D, animasi cara kerja, 11 project, meja rakit, dan simulator breadboard yang menjalankan kode Arduino. Tersedia dalam bahasa Indonesia dan Inggris.">
 <meta property="og:title" content="ESP32 Lab 3D">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect x='6' y='6' width='14' height='14' rx='2' fill='none' stroke='%23b15f19' stroke-width='2'/%3E%3Crect x='10' y='10' width='6' height='6' fill='%23b15f19'/%3E%3Cpath d='M9 2v4M13 2v4M17 2v4M9 20v4M13 20v4M17 20v4M2 9h4M2 13h4M2 17h4M20 9h4M20 13h4M20 17h4' stroke='%23b15f19' stroke-width='2'/%3E%3C/svg%3E">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<!-- three.js (3D) diunduh paralel sejak awal, tapi baru dijalankan oleh js/app.js supaya tidak menahan tampilan teks -->
+<link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
+<link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js">
 <script>
 /* Pengaturan layanan luar. Kosongkan untuk mematikan.
    goatcounter : kode akun GoatCounter (dashboard di https://<kode>.goatcounter.com)
@@ -17,7 +18,8 @@ window.ESP32LAB_CONFIG={goatcounter:'zaky',web3formsKey:'666c1694-2006-40ce-98a7
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap"></noscript>
 <link rel="stylesheet" href="css/main.css">
 </head>
 <body>

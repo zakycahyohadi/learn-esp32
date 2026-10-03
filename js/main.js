@@ -791,7 +791,11 @@ function selectProj(id,scroll){
   if(scroll)$('#project').scrollIntoView({behavior:RM?'auto':'smooth'});
 }
 onLang(()=>{renderPList();renderProjText();});
-$('#plist').addEventListener('click',e=>{const b=e.target.closest('[data-proj]');if(b)selectProj(b.dataset.proj);});
+$('#plist').addEventListener('click',e=>{const b=e.target.closest('[data-proj]');if(!b)return;selectProj(b.dataset.proj);
+  // di HP daftar project ada di atas detailnya, jadi gulir ke detail yang baru dipilih
+  if(innerWidth<=1020)$('.lab-main').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});});
+// daftar semua pin: terbuka di layar lebar, tertutup di HP supaya halaman tidak terlalu panjang
+{const d=$('#pinAll');if(d&&innerWidth>760)d.open=true;}
 document.addEventListener('click',e=>{
   const g=e.target.closest('[data-go]');if(g){selectProj(g.dataset.go,true);return;}
   const gp=e.target.closest('[data-go-path]');if(gp){const el=$('#path-adv');if(el)el.scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});}

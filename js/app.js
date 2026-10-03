@@ -16,7 +16,15 @@
   if(lang!=='en')lang='id';
   var other=function(l){return l==='en'?'id':'en';};
   document.documentElement.lang=lang;
+  // terapkan tema pilihan sejak awal supaya tidak berkedip sebelum main.js jalan
+  try{var th=JSON.parse(get('esp32lab-theme'));if(th==='dark'||th==='light')document.documentElement.setAttribute('data-theme',th);}catch(e){}
   var root=document.getElementById('app-root');
+
+  // three.js mulai dimuat sekarang, paralel dengan isi halaman; js/main.js menunggunya sebelum jalan
+  function loadScript(src){return new Promise(function(ok,fail){var s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=fail;document.head.appendChild(s);});}
+  var three3d=loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js')
+    .then(function(){return loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js');})
+    .catch(function(e){console.error(e);});
 
   // statistik pengunjung (GoatCounter): dimuat setelah halaman selesai supaya tidak memperlambat apa pun
   var CFG=window.ESP32LAB_CONFIG||{};
@@ -38,10 +46,14 @@
     EXAMPLES.forEach(function(n,i){var s=document.createElement('script');s.type='text/plain';s.id='code-'+n;s.textContent='\n'+res[i+1];f.appendChild(s);});
     return f;
   }
-  var cur,alt,simHtml={};
+  var alt,simHtml={};
+  // semua file diunduh paralel, tapi bahasa aktif langsung ditempel begitu siap supaya teks cepat tampil
+  var pCur=page(lang),pRest=Promise.all([page(other(lang)),load('lang/id/sim.html'),load('lang/en/sim.html')]);
+  pRest.catch(function(){});
   try{
-    var all=await Promise.all([page(lang),page(other(lang)),load('lang/id/sim.html'),load('lang/en/sim.html')]);
-    cur=all[0];alt=all[1];simHtml.id=all[2];simHtml.en=all[3];
+    root.appendChild(await pCur);
+    var rest=await pRest;
+    alt=rest[0];simHtml.id=rest[1];simHtml.en=rest[2];
   }catch(e){
     console.error(e);
     root.innerHTML='<p style="max-width:640px;margin:15vh auto;padding:0 16px;font:16px/1.6 system-ui,sans-serif">'
@@ -62,9 +74,11 @@
     },
     showView:showView,
     openSim:function(key,code){track('sim-project-'+key,'Project dibuka di simulator: '+key);showView('sim');var n=0;(function go(){n++;try{var w=frame&&frame.contentWindow;if(w&&w.__simOpen&&w.__simOpen(key,code))return;}catch(e){}if(n<100)setTimeout(go,100);})();}};
-  // tempel isi halaman sesuai bahasa, lalu jalankan skripnya
-  root.appendChild(cur);
-  await new Promise(function(ok,fail){var sc=document.createElement('script');sc.src='js/main.js';sc.onload=ok;sc.onerror=fail;document.body.appendChild(sc);});
+  // isi halaman sudah tertempel di atas; sekarang jalankan skripnya
+  // beri browser kesempatan menggambar teks dulu, baru tunggu three.js dan jalankan main.js
+  await new Promise(function(ok){requestAnimationFrame(function(){setTimeout(ok,0);});});
+  await three3d;
+  await loadScript('js/main.js');
 
   var view='main',frame=null;
   function els(){return [root.querySelector('header.hero'),root.querySelector('main'),root.querySelector('footer')];}
@@ -93,7 +107,7 @@
   var curSec='';
   function setCur(h){Array.prototype.forEach.call(document.querySelectorAll('.nav-links a,.bnav a'),function(a){if(a.getAttribute('href')===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});}
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){curSec='#'+e.target.id;if(view!=='sim')setCur(curSec);}});},{rootMargin:'-45% 0px -50% 0px'});
-    ['top','pinout','kenalan','cara-kerja','project','mulai'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});}
+    ['top','fitur','pinout','kenalan','cara-kerja','project','mulai','saran'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});}
   new MutationObserver(syncTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   document.addEventListener('click',function(e){
     var b=e.target.closest&&e.target.closest('[data-lang]');
