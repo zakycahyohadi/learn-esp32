@@ -1942,10 +1942,13 @@ function initSim(){
   function paintEditor(){edHL.innerHTML=hl(ed.value)+'\n';const n=ed.value.split('\n').length;let h='';for(let i=1;i<=n;i++)h+=`<div${i===errLineNo?' class="bad"':''}>${i}</div>`;gut.innerHTML=h;syncScroll();}
   function syncScroll(){edHL.parentElement.style.transform=`translate(${-ed.scrollLeft}px,${-ed.scrollTop}px)`;gut.style.transform=`translateY(${-ed.scrollTop}px)`;}
   ed.addEventListener('input',()=>{S.exKey=null;paintEditor();save();});ed.addEventListener('scroll',syncScroll);
+  // sisipkan teks lewat execCommand supaya Undo (Cmd/Ctrl+Z) tetap jalan dan event input (simpan + warnai) ikut terpicu
+  function edInsert(t){if(!document.execCommand('insertText',false,t)){ed.setRangeText(t,ed.selectionStart,ed.selectionEnd,'end');ed.dispatchEvent(new Event('input'));}}
   ed.addEventListener('keydown',e=>{
-    if(e.key==='Tab'){e.preventDefault();const s=ed.selectionStart,en=ed.selectionEnd;ed.setRangeText('  ',s,en,'end');paintEditor();}
-    else if(e.key==='Enter'){const s=ed.selectionStart;const line=ed.value.slice(0,s).split('\n').pop();let ind=(line.match(/^\s*/)||[''])[0];if(/\{\s*$/.test(line))ind+='  ';e.preventDefault();ed.setRangeText('\n'+ind,s,ed.selectionEnd,'end');paintEditor();}
-    else if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();run();}});
+    if(e.isComposing)return;
+    if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();run();}
+    else if(e.key==='Tab'&&!e.shiftKey&&!e.ctrlKey&&!e.metaKey&&!e.altKey){e.preventDefault();edInsert('  ');}
+    else if(e.key==='Enter'&&!e.shiftKey&&!e.altKey){const s=ed.selectionStart;const line=ed.value.slice(0,s).split('\n').pop();let ind=(line.match(/^\s*/)||[''])[0];if(/\{\s*$/.test(line))ind+='  ';e.preventDefault();edInsert('\n'+ind);}});
   function codeErr(er){errLineNo=er.line||0;paintEditor();const b=$('#codeErr');b.hidden=false;b.textContent=(er.line?_L(`Baris ${er.line}: `,`Line ${er.line}: `):'')+er.msg;
     if(er.line){const lh=parseFloat(getComputedStyle(ed).lineHeight)||20;ed.scrollTop=Math.max(0,(er.line-4)*lh);syncScroll();}}
   function clearCodeErr(){errLineNo=0;$('#codeErr').hidden=true;paintEditor();}

@@ -649,7 +649,7 @@ const WIFI_STEPS={
  sta:[[_L('Tersambung ke router','Join the router'),_L('ESP32 mencari nama WiFi dan login dengan password.','The ESP32 looks for the WiFi name and logs in with the password.')],[_L('Dapat alamat IP','Get an IP address'),_L('Router memberi alamat lewat DHCP, misalnya 192.168.1.23.','The router assigns an address over DHCP, for example 192.168.1.23.')],[_L('Kirim data ke internet','Send data to the internet'),_L('Data sensor dikirim lewat router ke server cloud (HTTP atau MQTT).','Sensor data travels through the router to a cloud server (HTTP or MQTT).')],[_L('HP menerima data','The phone receives it'),_L('Aplikasi di HP mengambil data dari cloud, dari mana saja.','An app on the phone pulls the data from the cloud, from anywhere.')]],
  ap:[[_L('ESP32 jadi hotspot','The ESP32 becomes a hotspot'),_L('ESP32 memancarkan WiFi sendiri bernama ESP32-AP.','The ESP32 broadcasts its own WiFi called ESP32-AP.')],[_L('HP tersambung ke ESP32-AP','The phone joins ESP32-AP'),_L('Tanpa router dan tanpa internet.','No router and no internet.')],[_L('HP membuka 192.168.4.1','The phone opens 192.168.4.1'),_L('Browser mengirim permintaan ke web server di ESP32.','The browser sends a request to the web server on the ESP32.')],[_L('ESP32 membalas halaman','The ESP32 replies with a page'),_L('Halaman kontrol tampil di HP.','The control page appears on the phone.')]]
 };
-const WIFI_CODE={sta:'WiFi.begin(_L("NAMA_WIFI","WIFI_NAME"), "PASSWORD");\nwhile (WiFi.status() != WL_CONNECTED) delay(500);\nSerial.println(WiFi.localIP());',ap:'WiFi.softAP("ESP32-AP", "12345678");\nSerial.println(WiFi.softAPIP());  // 192.168.4.1'};
+const WIFI_CODE={sta:_L('WiFi.begin("NAMA_WIFI", "PASSWORD");\nwhile (WiFi.status() != WL_CONNECTED) delay(500);\nSerial.println(WiFi.localIP());','WiFi.begin("WIFI_NAME", "PASSWORD");\nwhile (WiFi.status() != WL_CONNECTED) delay(500);\nSerial.println(WiFi.localIP());'),ap:'WiFi.softAP("ESP32-AP", "12345678");\nSerial.println(WiFi.softAPIP());  // 192.168.4.1'};
 function buildWifi(v){
   const G=new THREE.Group();v.scene.add(G);
   const b=makeESP32();b.group.position.set(-4.3,.74,1.1);b.group.rotation.y=.2;G.add(b.group);
@@ -664,7 +664,7 @@ function buildWifi(v){
   const rings=makeRings(G,ant,SIG);const trav=makeTraveler(G,PKT);
   let mode='sta',el=0,lastStep=-1,key='';
   const stepsEl=$('#wifiSteps');
-  function renderSteps(){stepsEl.innerHTML=WIFI_STEPS[mode].map((s,i)=>`<li data-i="${i}"><span class="n">${i+1}</span><div><b>${esc(s[0])}</b><span>${esc(s[1])}</span></div></li>`).join('');$('#wifiCode').innerHTML=hl(WIFI_CODE[mode]);lastStep=-1;}
+  function renderSteps(){stepsEl.innerHTML=WIFI_STEPS[mode].map((s,i)=>`<li data-i="${i}"><span class="n">${i+1}</span><div><b>${esc(s[0])}</b><span>${esc(s[1])}</span></div></li>`).join('');$('#wifiCode').innerHTML=hl(String(WIFI_CODE[mode]));lastStep=-1;}
   function setMode(m){mode=m;el=0;renderSteps();$$('#wifiMode .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.mode===m));router.group.visible=cloud.group.visible=m==='sta';}
   $('#wifiMode').addEventListener('click',e=>{const c=e.target.closest('[data-mode]');if(c)setMode(c.dataset.mode);});
   function screen(k){if(k===key)return;key=k;
