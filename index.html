@@ -63,6 +63,10 @@ code,kbd{font-family:var(--f-mono);font-size:.9em;background:var(--surface-2);bo
 .nav-links a{padding:6px 10px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap}
 .nav-links a:hover{color:var(--fg);background:var(--surface-2)}
 .nav-links a.nav-sim{color:var(--accent);font-weight:600}
+.bnav{display:none;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:70;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.bnav a{display:grid;justify-items:center;align-content:center;gap:3px;height:60px;padding:0 2px;font:600 10.5px/1.1 var(--f-body);color:var(--muted);text-decoration:none;text-align:center;-webkit-tap-highlight-color:transparent}
+.bnav svg{width:21px;height:21px}
+.bnav a[aria-current]{color:var(--accent)}
 .hero-nav a.hero-sim{border-color:var(--accent);background:var(--accent-soft)}
 .lang-sw{display:flex;flex:none;border:1px solid var(--line);border-radius:8px;overflow:hidden;font:600 12.5px var(--f-mono)}
 .lang-sw>*{padding:8px 9px;text-decoration:none;color:var(--muted);line-height:1;border:0;background:none;font:inherit;cursor:pointer}
@@ -290,6 +294,13 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
   section{padding-block:40px}
   .stage{height:clamp(340px,58vh,520px)}
 }
+@media (max-width:760px){
+  .nav-links{display:none}
+  .lang-sw{margin-left:auto}
+  .bnav{display:grid}
+  body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
+  .sim-view{height:calc(100vh - 59px - 60px);height:calc(100dvh - 59px - 60px - env(safe-area-inset-bottom,0px));min-height:480px}
+}
 @media (max-width:420px){
   .pinlist{grid-template-columns:minmax(0,1fr)}
   .wrap{padding-inline:16px}
@@ -317,6 +328,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
     </button>
   </div>
 </nav>
+<nav class="bnav" aria-label="Menu bawah"><a href="#pinout"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" stroke="currentColor" stroke-width="2"/></svg><span>Pinout</span></a><a href="#kenalan"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>Kenalan</span></a><a href="#cara-kerja"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h4l3-7 6 14 3-7h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>Cara kerja</span></a><a href="#project"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Project</span></a><a href="#simulator" class="nav-sim"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9v6l5-3z" fill="currentColor"/></svg><span>Simulator</span></a></nav>
 
 <header class="hero" id="top">
   <div class="wrap hero-grid">
@@ -960,6 +972,10 @@ code,kbd{font-family:var(--f-mono);font-size:.9em;background:var(--surface-2);bo
 .nav-links a{padding:6px 10px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap}
 .nav-links a:hover{color:var(--fg);background:var(--surface-2)}
 .nav-links a.nav-sim{color:var(--accent);font-weight:600}
+.bnav{display:none;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:70;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.bnav a{display:grid;justify-items:center;align-content:center;gap:3px;height:60px;padding:0 2px;font:600 10.5px/1.1 var(--f-body);color:var(--muted);text-decoration:none;text-align:center;-webkit-tap-highlight-color:transparent}
+.bnav svg{width:21px;height:21px}
+.bnav a[aria-current]{color:var(--accent)}
 .hero-nav a.hero-sim{border-color:var(--accent);background:var(--accent-soft)}
 .lang-sw{display:flex;flex:none;border:1px solid var(--line);border-radius:8px;overflow:hidden;font:600 12.5px var(--f-mono)}
 .lang-sw>*{padding:8px 9px;text-decoration:none;color:var(--muted);line-height:1;border:0;background:none;font:inherit;cursor:pointer}
@@ -1187,6 +1203,13 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
   section{padding-block:40px}
   .stage{height:clamp(340px,58vh,520px)}
 }
+@media (max-width:760px){
+  .nav-links{display:none}
+  .lang-sw{margin-left:auto}
+  .bnav{display:grid}
+  body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
+  .sim-view{height:calc(100vh - 59px - 60px);height:calc(100dvh - 59px - 60px - env(safe-area-inset-bottom,0px));min-height:480px}
+}
 @media (max-width:420px){
   .pinlist{grid-template-columns:minmax(0,1fr)}
   .wrap{padding-inline:16px}
@@ -1214,6 +1237,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
     </button>
   </div>
 </nav>
+<nav class="bnav" aria-label="Bottom menu"><a href="#pinout"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" stroke="currentColor" stroke-width="2"/></svg><span>Pinout</span></a><a href="#kenalan"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>Basics</span></a><a href="#cara-kerja"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h4l3-7 6 14 3-7h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>How it works</span></a><a href="#project"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Projects</span></a><a href="#simulator" class="nav-sim"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9v6l5-3z" fill="currentColor"/></svg><span>Simulator</span></a></nav>
 
 <header class="hero" id="top">
   <div class="wrap hero-grid">
@@ -2823,7 +2847,11 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .serial-form select{font:12px var(--f-mono);background:#0b1419;color:#c6d3d9;border:1px solid rgb(255 255 255/.18);border-radius:6px}
 .stage-err{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);padding:20px;text-align:center}
 @media (max-width:1100px){.grid{grid-template-columns:minmax(0,1fr)}.codep{height:520px}}
-@media (max-width:640px){.hint{display:none}.car-hud{width:140px;bottom:10px;padding:6px}.stage.has-car .ls-strip{max-width:none;right:158px}.car-hud .car-n{display:none}.pad{grid-template-columns:repeat(3,34px);grid-template-rows:repeat(3,28px)}.ls-strip{bottom:10px;left:8px;right:8px;flex-wrap:wrap;gap:2px 8px;padding:6px 10px;font-size:12.5px}.ls-strip b{order:0}.ls-strip .x{order:1}.ls-strip span:not(.x){order:2;flex-basis:100%;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.stage{height:420px}.top-in{gap:8px}.brand small{display:none}}
+@media (max-width:640px){.hint{display:none}.car-hud{width:140px;bottom:10px;padding:6px}.stage.has-car .ls-strip{max-width:none;right:158px}.car-hud .car-n{display:none}.pad{grid-template-columns:repeat(3,34px);grid-template-rows:repeat(3,28px)}.ls-strip{bottom:10px;left:8px;right:8px;flex-wrap:wrap;gap:2px 8px;padding:6px 10px;font-size:12.5px}.ls-strip b{order:0}.ls-strip .x{order:1}.ls-strip span:not(.x){order:2;flex-basis:100%;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.stage{height:clamp(380px,62vh,560px)}.top-in{gap:8px;flex-wrap:nowrap;min-height:50px;padding:6px 10px}.brand small{display:none}
+.top .sp{display:none}#exSel{flex:1 1 0;min-width:0}.state{display:none}.time{min-width:0}
+.tools{left:0;right:0;top:8px;padding:0 8px;flex-wrap:nowrap;overflow-x:auto;pointer-events:auto;scrollbar-width:none}.tools::-webkit-scrollbar{display:none}.tools>*{flex:none}
+.serial-wrap{height:280px}.panel{height:auto;min-height:300px;max-height:540px}.codep{height:380px}.wrap{padding-inline:10px}
+.selbar{left:8px;right:8px;transform:none;justify-content:flex-end}.selbar b{margin-right:auto}}
 </style>
 
 
@@ -3084,7 +3112,11 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .serial-form select{font:12px var(--f-mono);background:#0b1419;color:#c6d3d9;border:1px solid rgb(255 255 255/.18);border-radius:6px}
 .stage-err{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);padding:20px;text-align:center}
 @media (max-width:1100px){.grid{grid-template-columns:minmax(0,1fr)}.codep{height:520px}}
-@media (max-width:640px){.hint{display:none}.car-hud{width:140px;bottom:10px;padding:6px}.stage.has-car .ls-strip{max-width:none;right:158px}.car-hud .car-n{display:none}.pad{grid-template-columns:repeat(3,34px);grid-template-rows:repeat(3,28px)}.ls-strip{bottom:10px;left:8px;right:8px;flex-wrap:wrap;gap:2px 8px;padding:6px 10px;font-size:12.5px}.ls-strip b{order:0}.ls-strip .x{order:1}.ls-strip span:not(.x){order:2;flex-basis:100%;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.stage{height:420px}.top-in{gap:8px}.brand small{display:none}}
+@media (max-width:640px){.hint{display:none}.car-hud{width:140px;bottom:10px;padding:6px}.stage.has-car .ls-strip{max-width:none;right:158px}.car-hud .car-n{display:none}.pad{grid-template-columns:repeat(3,34px);grid-template-rows:repeat(3,28px)}.ls-strip{bottom:10px;left:8px;right:8px;flex-wrap:wrap;gap:2px 8px;padding:6px 10px;font-size:12.5px}.ls-strip b{order:0}.ls-strip .x{order:1}.ls-strip span:not(.x){order:2;flex-basis:100%;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.stage{height:clamp(380px,62vh,560px)}.top-in{gap:8px;flex-wrap:nowrap;min-height:50px;padding:6px 10px}.brand small{display:none}
+.top .sp{display:none}#exSel{flex:1 1 0;min-width:0}.state{display:none}.time{min-width:0}
+.tools{left:0;right:0;top:8px;padding:0 8px;flex-wrap:nowrap;overflow-x:auto;pointer-events:auto;scrollbar-width:none}.tools::-webkit-scrollbar{display:none}.tools>*{flex:none}
+.serial-wrap{height:280px}.panel{height:auto;min-height:300px;max-height:540px}.codep{height:380px}.wrap{padding-inline:10px}
+.selbar{left:8px;right:8px;transform:none;justify-content:flex-end}.selbar b{margin-right:auto}}
 </style>
 
 
@@ -5681,14 +5713,14 @@ void loop() {
   let view2d=false;
   function setView2D(on,quiet){
     view2d=!!on;const c=v.controls;
-    if(view2d){v.camera.fov=20;c.enableRotate=false;c.maxDistance=120;c.mouseButtons.LEFT=THREE.MOUSE.PAN;c.touches.ONE=THREE.TOUCH.PAN;v.camera.updateProjectionMatrix();v.setView([1.4,40,.01],[1.4,0,-.9],18.5);}
+    if(view2d){v.camera.fov=20;c.enableRotate=false;c.maxDistance=120;c.mouseButtons.LEFT=THREE.MOUSE.PAN;c.touches.ONE=THREE.TOUCH.PAN;v.camera.updateProjectionMatrix();if(v.camera.aspect<1)v.setView([-.4,40,.01],[-.4,0,-.4],16);else v.setView([1.4,40,.01],[1.4,0,-.9],18.5);}
     else{v.camera.fov=36;c.enableRotate=true;c.maxDistance=45;c.mouseButtons.LEFT=THREE.MOUSE.ROTATE;c.touches.ONE=THREE.TOUCH.ROTATE;v.camera.updateProjectionMatrix();v.setView(VIEW3D.cam,VIEW3D.tgt,VIEW3D.w);}
     $$('#viewSeg [data-view]').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.view==='2d')===view2d)));
     $('#stage-sim').classList.toggle('flat',view2d);
     if(!quiet)store('esp32sim-view',view2d?'2d':'3d');
   }
   $('#viewSeg').addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(b)setView2D(b.dataset.view==='2d');});
-  if(store('esp32sim-view')==='2d')setView2D(true,true);
+  {const sv=store('esp32sim-view');const small=Math.min(innerWidth,screen.width||innerWidth)<700||matchMedia('(pointer:coarse)').matches;if(sv==='2d'||(!sv&&small))setView2D(true,true);}
 
   /* ---- mobil robot: peta jalan + remote ---- */
   const hud=document.createElement('div');hud.className='car-hud';hud.hidden=true;
@@ -5813,7 +5845,7 @@ requestAnimationFrame(tick);
   function showView(v){
     view=v;var sim=v==='sim';var box=document.getElementById('simView');
     els().forEach(function(e){if(e)e.hidden=sim;});box.hidden=!sim;
-    var link=document.querySelector('.nav-links a.nav-sim');if(link){if(sim)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');}
+    setCur(sim?'#simulator':curSec);
     if(sim&&!frame){
       var l=API.lang,T='<scr'+'ipt';
       frame=document.createElement('iframe');frame.title=l==='en'?'ESP32 simulator':'Simulator ESP32';
@@ -5828,6 +5860,11 @@ requestAnimationFrame(tick);
     if(sim){window.scrollTo(0,0);if(location.hash!=='#simulator')history.replaceState(null,'','#simulator');}
     else if(location.hash==='#simulator')history.replaceState(null,'',location.pathname+location.search);
   }
+  // tandai menu yang aktif (menu bawah di HP)
+  var curSec='';
+  function setCur(h){Array.prototype.forEach.call(document.querySelectorAll('.nav-links a,.bnav a'),function(a){if(a.getAttribute('href')===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});}
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){curSec='#'+e.target.id;if(view!=='sim')setCur(curSec);}});},{rootMargin:'-45% 0px -50% 0px'});
+    ['top','pinout','kenalan','cara-kerja','project','mulai'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});}
   new MutationObserver(syncTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   document.addEventListener('click',function(e){
     var b=e.target.closest&&e.target.closest('[data-lang]');
