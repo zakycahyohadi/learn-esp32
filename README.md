@@ -90,7 +90,7 @@ Notes:
 
 ## Contributing
 
-Found a bug, a wrong pin description, or have an idea for a new lesson or project? Open an issue or pull request — contributions are welcome.
+Found a bug, a wrong pin description, or have an idea for a new lesson or project? Use the **feedback form** at the bottom of the website, or open an issue or pull request — contributions are welcome.
 
 ---
 

@@ -249,6 +249,27 @@ ol.steps li p{margin:2px 0 0;color:var(--muted);font-size:14.5px}
 .stage-row p{margin:2px 0 8px;font-size:14px;color:var(--muted)}
 .progress{height:8px;border-radius:4px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden;margin-top:10px}
 .progress i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+/* kritik & saran */
+.fb{max-width:760px}
+.fb-form{display:grid;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.fb-types{display:flex;flex-wrap:wrap;gap:8px}
+.fb-types label{position:relative;cursor:pointer}
+.fb-types input{position:absolute;opacity:0;pointer-events:none}
+.fb-types span{display:inline-block;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:14px;background:var(--surface-2)}
+.fb-types input:checked+span{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600}
+.fb-types input:focus-visible+span{outline:2px solid var(--signal);outline-offset:2px}
+.fb-field{display:grid;gap:6px;font-size:14px;font-weight:500}
+.fb-field i{font-style:normal;font-weight:400;color:var(--muted)}
+.fb-field input,.fb-field textarea{font:16px/1.5 var(--f-body);color:var(--fg);background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:9px 11px;width:100%;box-sizing:border-box;resize:vertical}
+.fb-field input:focus,.fb-field textarea:focus{outline:none;border-color:var(--signal);box-shadow:0 0 0 3px var(--signal-soft)}
+.fb-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fb-hp{position:absolute;left:-9999px;width:1px;height:1px}
+.fb-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.fb-status{margin:0;font-size:14px;color:var(--muted)}
+.fb-status.ok{color:var(--ok)}
+.fb-status.err{color:var(--bad)}
+footer a{color:var(--accent)}
+@media (max-width:640px){.fb-row{grid-template-columns:1fr}.fb-form{padding:16px}}
 footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:14px}
 
 

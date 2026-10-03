@@ -801,6 +801,38 @@ $('#labTabs').addEventListener('click',e=>{const t=e.target.closest('[data-lab]'
 $('#copyBtn').addEventListener('click',e=>copyText(codeOf(curProj),e.currentTarget,$('#codeOut')));
 $('#pSim').addEventListener('click',()=>{const k=SIM_OF[curProj];const w=window.__esp32lab;if(k&&w&&w.openSim)w.openSim(k,codeOf(curProj));});
 
+/* ============ kritik & saran (dikirim ke email lewat Web3Forms) ============ */
+(function(){
+  const f=$('#fbForm');if(!f)return;
+  const st=$('#fbStatus'),btn=$('#fbSend'),msgEl=$('#fbMsg'),emailEl=$('#fbEmail');
+  const say=(t,c)=>{st.textContent=t;st.className='fb-status'+(c?' '+c:'');};
+  onLang(()=>say(''));
+  f.addEventListener('submit',async e=>{
+    e.preventDefault();
+    if(btn.disabled)return;
+    const msg=msgEl.value.trim(),email=emailEl.value.trim();
+    if(msg.length<5){say(_L('Tulis pesannya dulu, minimal beberapa kata.','Please write a message first.'),'err');msgEl.focus();return;}
+    if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){say(_L('Format email belum benar.','That email address doesn\'t look right.'),'err');emailEl.focus();return;}
+    // honeypot: kolom tersembunyi ini hanya diisi bot
+    if(f.botcheck.checked){f.reset();say(_L('Terima kasih! Pesanmu sudah terkirim.','Thanks! Your message has been sent.'),'ok');return;}
+    const key=(window.ESP32LAB_CONFIG||{}).web3formsKey;
+    if(!key){say(_L('Form belum aktif. Coba lagi nanti.','The form isn\'t active yet. Please try again later.'),'err');return;}
+    const r=f.querySelector('input[name=jenis]:checked');const jenis=r?r.nextElementSibling.textContent:'';
+    btn.disabled=true;say(_L('Mengirim…','Sending…'));
+    try{
+      const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify({access_key:key,subject:'[ESP32 Lab] '+jenis+': '+msg.slice(0,60),from_name:'ESP32 Lab',
+          name:$('#fbName').value.trim()||'(anonim)',email:email||undefined,message:msg,
+          jenis:jenis,bahasa:LANG,layar:innerWidth+'×'+innerHeight,perangkat:navigator.userAgent})});
+      const d=await res.json().catch(()=>({}));
+      if(!res.ok||!d.success)throw new Error(d.message||res.status);
+      f.reset();say(_L('Terima kasih! Pesanmu sudah terkirim.','Thanks! Your message has been sent.'),'ok');
+    }catch(err){
+      console.error(err);say(_L('Gagal mengirim. Cek koneksi internet lalu coba lagi.','Couldn\'t send it. Check your connection and try again.'),'err');
+    }finally{btn.disabled=false;}
+  });
+})();
+
 /* ============ start ============ */
 let howV=null;
 if(HAS3D){

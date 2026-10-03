@@ -269,9 +269,38 @@ ledcWrite(18, 77);</pre>
     </div>
   </div>
 </section>
+<section id="saran">
+  <div class="wrap">
+    <div class="fb">
+      <div class="sec-head">
+        <div class="eyebrow">Feedback</div>
+        <h2>Help make ESP32 Lab better</h2>
+        <p>Is there a topic you want to learn, a bug in the simulator, or a feature idea? Write it here. It goes straight to the person who builds this site.</p>
+      </div>
+      <form class="fb-form" id="fbForm" novalidate>
+        <div class="fb-types" role="radiogroup" aria-label="Message type">
+          <label><input type="radio" name="jenis" value="saran" checked><span>Feature idea</span></label>
+          <label><input type="radio" name="jenis" value="bug"><span>Bug report</span></label>
+          <label><input type="radio" name="jenis" value="materi"><span>Topic request</span></label>
+          <label><input type="radio" name="jenis" value="lain"><span>Other</span></label>
+        </div>
+        <label class="fb-field"><span>Message</span><textarea id="fbMsg" name="message" rows="5" maxlength="3000" required></textarea></label>
+        <div class="fb-row">
+          <label class="fb-field"><span>Name <i>(optional)</i></span><input id="fbName" name="name" maxlength="80" autocomplete="name"></label>
+          <label class="fb-field"><span>Email <i>(optional, if you want a reply)</i></span><input id="fbEmail" name="email" type="email" maxlength="120" autocomplete="email"></label>
+        </div>
+        <input type="checkbox" name="botcheck" class="fb-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="fb-foot">
+          <button class="btn accent" type="submit" id="fbSend">Send</button>
+          <p class="fb-status" id="fbStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 </main>
 <section id="simView" class="sim-view" hidden aria-label="Simulator"></section>
 
 <footer>
-  <div class="wrap">The simulations on this page simplify the real world: sensor values, timing, and module behaviour can differ a little on real hardware. Always check the datasheet of the module you use.</div>
+  <div class="wrap">The simulations on this page simplify the real world: sensor values, timing, and module behaviour can differ a little on real hardware. Always check the datasheet of the module you use. <a href="#saran">Have a suggestion? Send it here</a></div>
 </footer>

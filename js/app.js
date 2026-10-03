@@ -18,6 +18,15 @@
   document.documentElement.lang=lang;
   var root=document.getElementById('app-root');
 
+  // statistik pengunjung (GoatCounter): dimuat setelah halaman selesai supaya tidak memperlambat apa pun
+  var CFG=window.ESP32LAB_CONFIG||{};
+  function track(path,title){try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,title:title,event:true});}catch(e){}}
+  if(CFG.goatcounter){
+    var startGC=function(){var s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';
+      s.setAttribute('data-goatcounter','https://'+CFG.goatcounter+'.goatcounter.com/count');document.body.appendChild(s);};
+    if(document.readyState==='complete')setTimeout(startGC,0);else window.addEventListener('load',startGC);
+  }
+
   // kode Arduino tiap project, urutannya sama untuk kedua bahasa
   var EXAMPLES=['blink','button','fade','dht','sonar','pir','webled','dhtweb','relay','servo','motor'];
   function load(path){return fetch(path).then(function(r){if(!r.ok)throw new Error(path+' ('+r.status+')');return r.text();});}
@@ -46,12 +55,13 @@
     setLang:function(l){
       l=l==='en'?'en':'id';if(l===API.lang)return;
       API.lang=l;set('esp32lab-lang',l);window.name='esp32lang:'+l;
+      track('lang-'+l,'Ganti bahasa: '+l);
       if(window.__langHook)window.__langHook(l);
       if(frame&&frame.contentWindow&&frame.contentWindow.__langHook){try{frame.contentWindow.__langHook(l);}catch(e){console.error(e);}}
       var fl=document.querySelector('iframe');if(fl)fl.title=l==='en'?'ESP32 simulator':'Simulator ESP32';
     },
     showView:showView,
-    openSim:function(key,code){showView('sim');var n=0;(function go(){n++;try{var w=frame&&frame.contentWindow;if(w&&w.__simOpen&&w.__simOpen(key,code))return;}catch(e){}if(n<100)setTimeout(go,100);})();}};
+    openSim:function(key,code){track('sim-project-'+key,'Project dibuka di simulator: '+key);showView('sim');var n=0;(function go(){n++;try{var w=frame&&frame.contentWindow;if(w&&w.__simOpen&&w.__simOpen(key,code))return;}catch(e){}if(n<100)setTimeout(go,100);})();}};
   // tempel isi halaman sesuai bahasa, lalu jalankan skripnya
   root.appendChild(cur);
   await new Promise(function(ok,fail){var sc=document.createElement('script');sc.src='js/main.js';sc.onload=ok;sc.onerror=fail;document.body.appendChild(sc);});
@@ -64,6 +74,7 @@
     els().forEach(function(e){if(e)e.hidden=sim;});box.hidden=!sim;
     setCur(sim?'#simulator':curSec);
     if(sim&&!frame){
+      track('simulator','Simulator dibuka');
       // simulator berjalan di iframe terpisah; path relatif (css/, js/) tetap mengacu ke folder halaman ini
       var l=API.lang,T='<scr'+'ipt';
       frame=document.createElement('iframe');frame.title=l==='en'?'ESP32 simulator':'Simulator ESP32';

@@ -269,9 +269,38 @@ ledcWrite(18, 77);</pre>
     </div>
   </div>
 </section>
+<section id="saran">
+  <div class="wrap">
+    <div class="fb">
+      <div class="sec-head">
+        <div class="eyebrow">Kritik &amp; saran</div>
+        <h2>Bantu ESP32 Lab jadi lebih baik</h2>
+        <p>Ada materi yang ingin kamu pelajari, bug di simulator, atau ide fitur? Tulis di sini. Pesannya langsung sampai ke pembuat website.</p>
+      </div>
+      <form class="fb-form" id="fbForm" novalidate>
+        <div class="fb-types" role="radiogroup" aria-label="Jenis pesan">
+          <label><input type="radio" name="jenis" value="saran" checked><span>Saran fitur</span></label>
+          <label><input type="radio" name="jenis" value="bug"><span>Laporan bug</span></label>
+          <label><input type="radio" name="jenis" value="materi"><span>Request materi</span></label>
+          <label><input type="radio" name="jenis" value="lain"><span>Lainnya</span></label>
+        </div>
+        <label class="fb-field"><span>Pesan</span><textarea id="fbMsg" name="message" rows="5" maxlength="3000" required></textarea></label>
+        <div class="fb-row">
+          <label class="fb-field"><span>Nama <i>(opsional)</i></span><input id="fbName" name="name" maxlength="80" autocomplete="name"></label>
+          <label class="fb-field"><span>Email <i>(opsional, kalau ingin dibalas)</i></span><input id="fbEmail" name="email" type="email" maxlength="120" autocomplete="email"></label>
+        </div>
+        <input type="checkbox" name="botcheck" class="fb-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="fb-foot">
+          <button class="btn accent" type="submit" id="fbSend">Kirim</button>
+          <p class="fb-status" id="fbStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 </main>
 <section id="simView" class="sim-view" hidden aria-label="Simulator"></section>
 
 <footer>
-  <div class="wrap">Simulasi di halaman ini menyederhanakan dunia nyata: nilai sensor, waktu, dan perilaku modul bisa sedikit berbeda di board asli. Selalu cek datasheet modul yang kamu pakai.</div>
+  <div class="wrap">Simulasi di halaman ini menyederhanakan dunia nyata: nilai sensor, waktu, dan perilaku modul bisa sedikit berbeda di board asli. Selalu cek datasheet modul yang kamu pakai. <a href="#saran">Punya saran? Kirim di sini</a></div>
 </footer>
