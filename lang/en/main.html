@@ -1,0 +1,277 @@
+<nav class="top" aria-label="Main navigation">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="6" y="6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="10" width="6" height="6" fill="var(--accent)"/><path d="M9 2v4M13 2v4M17 2v4M9 20v4M13 20v4M17 20v4M2 9h4M2 13h4M2 17h4M20 9h4M20 13h4M20 17h4" stroke="currentColor" stroke-width="2"/></svg>
+      ESP32 Lab
+    </a>
+    <div class="nav-links">
+      <a href="#pinout">Pinout 3D</a>
+      <a href="#kenalan" class="opt">Basics</a>
+      <a href="#cara-kerja">How it works</a>
+      <a href="#project">Projects</a>
+      <a href="#simulator" class="nav-sim">Simulator</a>
+      <a href="#mulai">Get started</a>
+    </div>
+    <div class="lang-sw" role="group" aria-label="Bahasa / Language"><button type="button" data-lang="id" aria-pressed="false">ID</button><button type="button" data-lang="en" aria-pressed="true">EN</button></div>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch light/dark theme">
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</nav>
+<nav class="bnav" aria-label="Bottom menu"><a href="#pinout"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" stroke="currentColor" stroke-width="2"/></svg><span>Pinout</span></a><a href="#kenalan"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>Basics</span></a><a href="#cara-kerja"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h4l3-7 6 14 3-7h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>How it works</span></a><a href="#project"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Projects</span></a><a href="#simulator" class="nav-sim"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9v6l5-3z" fill="currentColor"/></svg><span>Simulator</span></a></nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Interactive learning module · ESP32 DevKit V1</div>
+      <h1 style="margin-top:12px">Learn the ESP32 by spinning it, clicking it, and switching it on.</h1>
+      <p class="lede">You already know Arduino. The ESP32 is programmed the same way, but it has WiFi, Bluetooth, and far more power. Start with the 3D board below, see how it works, then build and run your own circuits in the simulator.</p>
+      <div class="specs">
+        <span class="spec"><b>240 MHz</b> · 2 core</span>
+        <span class="spec"><b>520 KB</b> SRAM</span>
+        <span class="spec"><b>WiFi</b> 2.4 GHz</span>
+        <span class="spec"><b>Bluetooth</b> 4.2 + BLE</span>
+        <span class="spec">Logic <b>3.3 V</b></span>
+        <span class="spec">ADC <b>12-bit</b></span>
+      </div>
+    </div>
+    <div class="hero-nav">
+      <a href="#pinout"><span class="k">01</span><span class="t">Take the board apart</span><span class="s">Click any pin to see what it does</span><span class="arr">↓</span></a>
+      <a href="#cara-kerja"><span class="k">02</span><span class="t">See how it works</span><span class="s">WiFi, ADC, and PWM, animated</span><span class="arr">↓</span></a>
+      <a href="#project"><span class="k">03</span><span class="t">11 ready-to-try projects</span><span class="s">Parts, wiring, code, open straight in the simulator</span><span class="arr">↓</span></a>
+      <a href="#simulator" class="hero-sim"><span class="k">04</span><span class="t">Simulator + 9 lessons</span><span class="s">Start from zero: build on a breadboard, write code, run it</span><span class="arr">→</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="pinout">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Pinout 3D</div>
+      <h2>ESP32 DevKit V1, 30 pin</h2>
+      <p>Drag to rotate, scroll or pinch to zoom, click a pin to see what it does. Pin colours show how safe each pin is to use.</p>
+    </div>
+    <div class="explorer">
+      <div class="stage" id="stage-board">
+        <div class="stage-tools"><button class="btn ghost sm" type="button" data-reset="board">Reset camera</button></div>
+        <div class="stage-hint">Click any pin</div>
+      </div>
+      <aside class="pin-side">
+        <div class="panel">
+          <div class="small-label">Show pins for</div>
+          <div class="chips" id="pinFilters"></div>
+          <div class="legend" id="safeLegend" style="margin-top:12px">
+            <span><i class="dot ok"></i>Safe</span><span><i class="dot warn"></i>With conditions</span><span><i class="dot bad"></i>Avoid / not a GPIO</span>
+          </div>
+        </div>
+        <div class="panel pin-card" id="pinCard" aria-live="polite"></div>
+      </aside>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <div class="small-label">All pins, from the antenna end to the USB end</div>
+      <div class="pinlist">
+        <div><div class="small-label" style="color:var(--fg)">EN side</div><ol id="pinListL"></ol></div>
+        <div><div class="small-label" style="color:var(--fg)">D23 side</div><ol id="pinListR"></ol></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kenalan">
+  <div class="wrap">
+    <div class="intro">
+      <div class="sec-head" style="margin:0">
+        <div class="eyebrow">Basics</div>
+        <h2>What is the ESP32?</h2>
+        <p style="color:var(--fg)">The ESP32 is a microcontroller made by Espressif with WiFi and Bluetooth built into one chip. The most common board is the <b>30-pin ESP32 DevKit V1</b>, the one you rotated above. The large metal can at one end is the ESP32-WROOM-32 module: it holds the chip, 4 MB of flash memory, and the zig-zag antenna at the tip.</p>
+        <p>You program it in the Arduino IDE with the same functions as an Arduino: <code>pinMode</code>, <code>digitalWrite</code>, <code>analogRead</code>, <code>Serial.println</code>. The differences are the voltage, the number of features, and a few pin rules.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table class="cmp">
+          <thead><tr><th></th><th>ESP32 DevKit V1</th><th>Arduino Uno</th></tr></thead>
+          <tbody>
+            <tr><td>Processor</td><td class="hi">Xtensa LX6 32-bit, 2 core, 240 MHz</td><td>ATmega328P 8-bit, 16 MHz</td></tr>
+            <tr><td>RAM</td><td class="hi">520 KB</td><td>2 KB</td></tr>
+            <tr><td>Program flash</td><td class="hi">4 MB (typical)</td><td>32 KB</td></tr>
+            <tr><td>Logic voltage</td><td class="hi">3.3 V</td><td>5 V</td></tr>
+            <tr><td>WiFi</td><td class="hi">802.11 b/g/n, 2.4 GHz</td><td>None</td></tr>
+            <tr><td>Bluetooth</td><td class="hi">Classic + BLE 4.2</td><td>None</td></tr>
+            <tr><td>ADC</td><td class="hi">12-bit (0–4095), up to 18 channels</td><td>10-bit (0–1023), 6 channels</td></tr>
+            <tr><td>DAC</td><td class="hi">2 channels, 8-bit</td><td>None</td></tr>
+            <tr><td>Touch sensing</td><td class="hi">10 pin</td><td>None</td></tr>
+            <tr><td>PWM</td><td class="hi">16 channels, almost every pin</td><td>6 pin</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="h3-gap">What is it used for?</h3>
+    <div class="uses" id="uses">
+      <div class="use"><span class="tag">Smart home</span><h3>Control lights from your phone</h3><p>The ESP32 is powerful enough to run its own web server. Open its IP address in your phone browser, tap a button, and the relay switches on.</p><div class="go"><button class="chip" data-go="webled">#7 Web server LED</button><button class="chip" data-go="relay">#9 Lamp relay</button></div></div>
+      <div class="use"><span class="tag">Monitoring</span><h3>Monitor room temperature</h3><p>Read temperature, humidity, or soil moisture and show it on your phone. The basis of smart gardens and aquarium monitors.</p><div class="go"><button class="chip" data-go="dht">#4 DHT11</button><button class="chip" data-go="dhtweb">#8 Monitor via WiFi</button></div></div>
+      <div class="use"><span class="tag">Security</span><h3>Detect motion</h3><p>A PIR sensor detects moving body heat. Turn on a light, sound an alarm, or send a notification.</p><div class="go"><button class="chip" data-go="pir">#6 PIR sensor</button></div></div>
+      <div class="use"><span class="tag">Robotics</span><h3>Robots and robot arms</h3><p>Control motor speed with PWM, move a servo to a set angle, and avoid obstacles with a distance sensor.</p><div class="go"><button class="chip" data-go="motor">#11 Motor DC</button><button class="chip" data-go="servo">#10 Servo</button><button class="chip" data-go="sonar">#5 Ultrasonic</button></div></div>
+      <div class="use"><span class="tag">Bluetooth</span><h3>Remotes and wearables</h3><p>Low-power BLE connects the ESP32 to a phone app, for example a remote, a wristband, or a heart-rate sensor.</p><div class="go"><button class="chip" data-go-path="1">Advanced topics</button></div></div>
+      <div class="use"><span class="tag">Battery</span><h3>Devices left out in the field</h3><p>Deep sleep mode cuts the ESP32 chip down to microamps, then wakes it every few minutes to send data.</p><div class="go"><button class="chip" data-go-path="1">Advanced topics</button></div></div>
+    </div>
+
+    <h3 class="h3-gap">Key rules when moving from Arduino</h3>
+    <ul class="rules">
+      <li><b>3.3V</b><span>ESP32 logic is 3.3 V. Never feed 5 V straight into a GPIO. Signals from 5 V sensors need a voltage divider or a level shifter.</span></li>
+      <li><b>ADC2</b><span>While WiFi is on, ADC2 pins (GPIO 0, 2, 4, 12–15, 25–27) cannot <code>analogRead</code>. Use ADC1: GPIO 32–39.</span></li>
+      <li><b>34–39</b><span>GPIO 34, 35, 36 (VP), and 39 (VN) are input-only and have no internal pull-up.</span></li>
+      <li><b>0-4095</b><span><code>analogRead</code> returns 0–4095 (12-bit), not 0–1023. The Serial Monitor is usually set to 115200 baud.</span></li>
+      <li><b>BOOT</b><span>Strapping pins (GPIO 0, 2, 5, 12, 15) set the boot mode at power-up. Do not attach loads that pull them to the wrong level.</span></li>
+      <li><b>6–11</b><span>GPIO 6–11 are used by the flash memory and are not broken out on the 30-pin board. If another board exposes them, leave them alone.</span></li>
+      <li><b>20mA</b><span>Keep each pin under about 20 mA. Motors, relays, and lamps always go through a driver module, never straight from a pin.</span></li>
+      <li><b>GND</b><span>When you use a separate power supply (motor battery, adapter), connect its GND to the ESP32 GND.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="cara-kerja">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">How it works</div>
+      <h2>What actually happens inside</h2>
+      <p>Three ideas you will use in almost every ESP32 project. Pick a topic, then play with the controls beside it.</p>
+    </div>
+    <div class="tabs" role="tablist" id="howTabs">
+      <button class="tab" role="tab" data-how="wifi" aria-selected="true">WiFi</button>
+      <button class="tab" role="tab" data-how="adc" aria-selected="false">Reading analog (ADC)</button>
+      <button class="tab" role="tab" data-how="pwm" aria-selected="false">PWM</button>
+    </div>
+    <div class="how">
+      <div class="stage" id="stage-how">
+        <div class="stage-tools"><button class="btn ghost sm" type="button" data-reset="how">Reset camera</button></div>
+      </div>
+      <aside class="how-side">
+        <div class="panel how-side" data-how-panel="wifi">
+          <h3>How the ESP32 talks over WiFi</h3>
+          <p>The 2.4 GHz WiFi radio is inside the chip, and the antenna is the zig-zag trace at the end of the module. There are two modes you will use most.</p>
+          <div class="chips" id="wifiMode">
+            <button class="chip" data-mode="sta" aria-pressed="true">Station (STA)</button>
+            <button class="chip" data-mode="ap" aria-pressed="false">Access Point (AP)</button>
+          </div>
+          <ol class="steps-live" id="wifiSteps"></ol>
+          <pre class="mini-code" id="wifiCode"></pre>
+          <p class="note">The ESP32 can only join 2.4 GHz WiFi. If your router is dual-band, make sure its 2.4 GHz network is enabled.</p>
+        </div>
+        <div class="panel how-side" data-how-panel="adc" hidden>
+          <h3>The ADC turns voltage into a number</h3>
+          <p>The potentiometer divides the 3.3 V supply. The 12-bit ADC measures the voltage on pin D34 and turns it into a number from 0 to 4095. The twelve blocks above are the 12 bits of that number.</p>
+          <div class="field"><label for="adcSlider">Turn the potentiometer <b id="adcPct">50%</b></label><input type="range" id="adcSlider" min="0" max="1000" value="500"></div>
+          <label class="check"><input type="checkbox" id="adcAuto"> Turn automatically</label>
+          <div class="readouts">
+            <div class="ro"><b id="adcV">1.65 V</b><span>Pin voltage</span></div>
+            <div class="ro"><b id="adcRaw">2048</b><span>analogRead(34)</span></div>
+          </div>
+          <div class="ro"><b id="adcBin" style="font-size:16px;letter-spacing:.06em">100000000000</b><span>In binary (12 bits)</span></div>
+          <pre class="mini-code">// raw value 0–4095
+int value = analogRead(34);
+// approximate voltage
+float volts = value * 3.3 / 4095.0;
+// more accurate, in millivolts
+int mv = analogReadMilliVolts(34);</pre>
+          <p class="note">The ESP32 ADC is less linear near 0 V and 3.3 V. For voltages, <code>analogReadMilliVolts()</code> uses the factory calibration, so it is more accurate.</p>
+        </div>
+        <div class="panel how-side" data-how-panel="pwm" hidden>
+          <h3>PWM: faking analog</h3>
+          <p>Most ESP32 pins can only be HIGH (3.3 V) or LOW (0 V). PWM switches the pin on and off very quickly. The share of time spent HIGH is the <b>duty cycle</b>, and the average feels like a lower voltage.</p>
+          <div class="field"><label for="pwmSlider">Duty cycle <b id="pwmPct">30%</b></label><input type="range" id="pwmSlider" min="0" max="100" value="30"></div>
+          <label class="check"><input type="checkbox" id="pwmSlow" checked> Slow mode (2 Hz) so you can see the blinking</label>
+          <div class="readouts">
+            <div class="ro"><b id="pwmVal">77</b><span>ledcWrite (0–255)</span></div>
+            <div class="ro"><b id="pwmAvg">0.99 V</b><span>Average voltage</span></div>
+          </div>
+          <pre class="mini-code">// pin 18, 5 kHz, 8-bit resolution
+ledcAttach(18, 5000, 8);
+// 77 out of 255 = 30% duty
+ledcWrite(18, 77);</pre>
+          <p class="note">Turn slow mode off. At 5 kHz your eye cannot see the blinking, so the LED looks dim and steady. The same trick controls motor speed.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Project lab</div>
+      <h2>11 projects, from LEDs to motors</h2>
+      <p>Each project lists the parts, the wiring and upload-ready code. Press <b>Open in simulator</b> to build and run it without real hardware. The code targets the <b>esp32 by Espressif 3.x</b> board package.</p>
+    </div>
+    <div class="lab">
+      <nav class="plist" id="plist" aria-label="Project list"></nav>
+      <div class="lab-main">
+        <div class="lab-head">
+          <div><div class="eyebrow" id="pCat"></div><h3 id="pTitle" style="font-size:26px;margin-top:4px"></h3><p id="pDesc"></p></div>
+          <div class="lab-acts"><button class="btn accent" type="button" id="pSim">▶ Open in simulator</button><button class="btn ghost" type="button" id="pDone">Mark as done</button></div>
+        </div>
+        <div class="tabs" role="tablist" id="labTabs">
+          <button class="tab" role="tab" data-lab="wiring" aria-selected="true">Wiring</button>
+          <button class="tab" role="tab" data-lab="code" aria-selected="false">Code</button>
+        </div>
+        <div class="wiring" data-lab-panel="wiring">
+          <div class="panel" style="display:grid;gap:14px;align-content:start">
+            <div><div class="small-label">Parts</div><ul class="parts" id="pParts"></ul></div>
+            <div id="pLibsWrap"><div class="small-label">Library (Sketch → Include Library → Manage Libraries)</div><ul class="parts" id="pLibs"></ul></div>
+          </div>
+          <div class="panel" style="display:grid;gap:12px;align-content:start">
+            <div class="small-label" style="margin:0">Connections</div>
+            <div style="overflow-x:auto"><table class="wt"><thead><tr><th>From</th><th>To</th></tr></thead><tbody id="pWiring"></tbody></table></div>
+            <p class="note" id="pNote"></p>
+            <p class="note warn" id="pNoSim" hidden>This WiFi project cannot run in the simulator. Upload the code to a real board, then open its IP address from your phone.</p>
+          </div>
+        </div>
+        <div data-lab-panel="code" hidden>
+          <div class="code">
+            <div class="code-bar"><span id="codeName">sketch.ino</span><span>Board: ESP32 Dev Module</span></div>
+            <button class="copy" type="button" id="copyBtn">Copy</button>
+            <pre><code id="codeOut"></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mulai">
+  <div class="wrap">
+    <div class="start">
+      <div>
+        <div class="sec-head">
+          <div class="eyebrow">Get started on your computer</div>
+          <h2 id="setup">Set up the Arduino IDE for ESP32</h2>
+        </div>
+        <ol class="steps">
+          <li><div><b>Install Arduino IDE 2</b><p>Download it from arduino.cc. If you already have it, skip to the next step.</p></div></li>
+          <li><div><b>Add the ESP32 board URL</b><p>File → Preferences → <i>Additional boards manager URLs</i>, paste this address:</p>
+            <div class="urlbox"><code id="boardUrl">https://espressif.github.io/arduino-esp32/package_esp32_index.json</code><button class="btn ghost sm" type="button" id="copyUrl">Copy</button></div></div></li>
+          <li><div><b>Install the board package</b><p>Tools → Board → Boards Manager, search for <b>esp32</b>, and install <b>esp32 by Espressif Systems</b> (version 3.x).</p></div></li>
+          <li><div><b>Plug in the board</b><p>Use a USB data cable, not a charge-only cable. If no port shows up, install the <b>CP210x</b> or <b>CH340</b> driver to match the USB chip on your board.</p></div></li>
+          <li><div><b>Choose the board and port</b><p>Tools → Board → <b>ESP32 Dev Module</b>, then Tools → Port. If uploads keep failing, lower Upload Speed to 115200.</p></div></li>
+          <li><div><b>Upload</b><p>If <code>Connecting.....</code> keeps going, hold the <b>BOOT</b> button on the board until the upload percentage starts moving.</p></div></li>
+        </ol>
+      </div>
+      <div>
+        <div class="sec-head">
+          <div class="eyebrow">Learning path</div>
+          <h2>Suggested order</h2>
+          <p>Tick off the projects you have tried on a real board. Progress is saved in this browser.</p>
+        </div>
+        <div class="path" id="path"></div>
+        <div class="progress"><i id="progBar"></i></div>
+        <p style="font-size:14px;color:var(--muted);margin:6px 0 0" id="progText"></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<section id="simView" class="sim-view" hidden aria-label="Simulator"></section>
+
+<footer>
+  <div class="wrap">The simulations on this page simplify the real world: sensor values, timing, and module behaviour can differ a little on real hardware. Always check the datasheet of the module you use.</div>
+</footer>

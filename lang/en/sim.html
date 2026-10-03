@@ -1,0 +1,63 @@
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect x='6' y='6' width='14' height='14' rx='2' fill='none' stroke='%23b15f19' stroke-width='2'/%3E%3Crect x='10' y='10' width='6' height='6' fill='%23b15f19'/%3E%3Cpath d='M9 2v4M13 2v4M17 2v4M9 20v4M13 20v4M17 20v4M2 9h4M2 13h4M2 17h4M20 9h4M20 13h4M20 17h4' stroke='%23b15f19' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index-en.html" title="Back to ESP32 Lab">
+      <svg width="24" height="24" viewBox="0 0 26 26" aria-hidden="true"><rect x="6" y="6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="10" width="6" height="6" fill="var(--accent)"/><path d="M9 2v4M13 2v4M17 2v4M9 20v4M13 20v4M17 20v4M2 9h4M2 13h4M2 17h4M20 9h4M20 13h4M20 17h4" stroke="currentColor" stroke-width="2"/></svg>
+      ESP32 Lab <small>Simulator</small>
+    </a>
+    <a class="back" href="index-en.html">← Learning materials</a>
+    <span class="sp"></span>
+    <select class="sel" id="exSel" aria-label="Open an example"></select>
+    <button class="btn run" type="button" id="runBtn" title="Ctrl + Enter">▶ Run</button>
+    <button class="btn stop" type="button" id="stopBtn" hidden>■ Stop</button>
+    <span class="state" id="runState">Stopped</span>
+    <span class="time" id="runTime">0.0 s</span>
+    <div class="lang-sw" role="group" aria-label="Language"><a href="simulator.html" hreflang="id" lang="id">ID</a><span aria-current="true">EN</span></div>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch light/dark theme"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+<main class="wrap">
+  <div class="rack" id="rack" aria-label="Parts shelf"></div>
+  <div class="grid">
+    <div class="stage" id="stage-sim">
+      <div class="tools">
+        <div class="toolbox"><span class="t">Wire</span><div class="swatches" id="wireColors"></div></div>
+        <div class="toolbox seg" id="viewSeg" role="group" aria-label="View"><button type="button" data-view="3d" aria-pressed="true">3D</button><button type="button" data-view="2d" aria-pressed="false">2D</button></div>
+        <span class="sp"></span>
+        <label class="toolbox check"><input type="checkbox" id="soundOn"> Sound</label>
+        <label class="toolbox check"><input type="checkbox" id="labelsOn" checked> Label</label>
+        <button class="btn ghost sm" type="button" data-reset="sim">Reset camera</button>
+        <button class="btn ghost sm" type="button" id="clearBtn">Clear</button>
+      </div>
+      <div class="hint">Click or drag from a hole/pin to its destination to add a wire · drag parts · R rotate · Del delete</div>
+    </div>
+    <div class="codep">
+      <div class="code-bar"><b>sketch.ino</b><span>ESP32 Dev Module</span><span class="sp"></span><button type="button" id="copyCode">Copy code</button></div>
+      <div class="editor">
+        <div class="gutter-box"><div id="gutter"></div></div>
+        <div class="ed-box"><pre aria-hidden="true"><code id="codeHL"></code></pre><textarea id="code" spellcheck="false" autocomplete="off" autocapitalize="off" wrap="off" aria-label="Arduino code editor"></textarea></div>
+      </div>
+      <p class="code-err" id="codeErr" hidden></p>
+    </div>
+    <div class="panel">
+      <div class="tabs" role="tablist" id="insTabs">
+        <button class="tab" role="tab" data-ins="learn" aria-selected="true">Learn</button>
+        <button class="tab" role="tab" data-ins="sel" aria-selected="false">Part</button>
+        <button class="tab" role="tab" data-ins="prob" aria-selected="false">Checker <span id="probN"></span></button>
+      </div>
+      <div class="scroll" id="insLearn" data-ins-panel="learn"></div>
+      <div class="scroll" id="insSel" data-ins-panel="sel" hidden></div>
+      <div class="scroll" id="insProb" data-ins-panel="prob" hidden></div>
+    </div>
+    <div class="serial-wrap">
+      <div class="serial-bar"><span>Serial Monitor · 115200 baud</span><span class="sp"></span><label><input type="checkbox" id="autoScroll" checked> autoscroll</label><button type="button" id="serialClear2">Clear</button></div>
+      <div class="serial" id="simSerial" aria-live="off"></div>
+      <form class="serial-form" id="serialForm2"><input id="serialIn2" autocomplete="off" placeholder="Send text to the ESP32" maxlength="80"><select id="lineEnd" aria-label="Line ending"><option value="nl">Newline</option><option value="none">None</option></select><button class="btn sm accent" type="submit">Send</button></form>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,277 @@
+<nav class="top" aria-label="Navigasi utama">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="6" y="6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="10" width="6" height="6" fill="var(--accent)"/><path d="M9 2v4M13 2v4M17 2v4M9 20v4M13 20v4M17 20v4M2 9h4M2 13h4M2 17h4M20 9h4M20 13h4M20 17h4" stroke="currentColor" stroke-width="2"/></svg>
+      ESP32 Lab
+    </a>
+    <div class="nav-links">
+      <a href="#pinout">Pinout 3D</a>
+      <a href="#kenalan" class="opt">Kenalan</a>
+      <a href="#cara-kerja">Cara kerja</a>
+      <a href="#project">Project</a>
+      <a href="#simulator" class="nav-sim">Simulator</a>
+      <a href="#mulai">Mulai</a>
+    </div>
+    <div class="lang-sw" role="group" aria-label="Bahasa / Language"><button type="button" data-lang="id" aria-pressed="true">ID</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="Ganti tema terang/gelap">
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</nav>
+<nav class="bnav" aria-label="Menu bawah"><a href="#pinout"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" stroke="currentColor" stroke-width="2"/></svg><span>Pinout</span></a><a href="#kenalan"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>Kenalan</span></a><a href="#cara-kerja"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h4l3-7 6 14 3-7h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>Cara kerja</span></a><a href="#project"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Project</span></a><a href="#simulator" class="nav-sim"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9v6l5-3z" fill="currentColor"/></svg><span>Simulator</span></a></nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Modul belajar interaktif · ESP32 DevKit V1</div>
+      <h1 style="margin-top:12px">Belajar ESP32 sambil memutar, mengklik, dan menyalakannya.</h1>
+      <p class="lede">Kamu sudah kenal Arduino. ESP32 diprogram dengan cara yang sama, tapi punya WiFi, Bluetooth, dan tenaga jauh lebih besar. Mulai dari board 3D di bawah, pahami cara kerjanya, lalu rakit dan jalankan rangkaianmu sendiri di simulator.</p>
+      <div class="specs">
+        <span class="spec"><b>240 MHz</b> · 2 core</span>
+        <span class="spec"><b>520 KB</b> SRAM</span>
+        <span class="spec"><b>WiFi</b> 2.4 GHz</span>
+        <span class="spec"><b>Bluetooth</b> 4.2 + BLE</span>
+        <span class="spec">Logika <b>3.3 V</b></span>
+        <span class="spec">ADC <b>12-bit</b></span>
+      </div>
+    </div>
+    <div class="hero-nav">
+      <a href="#pinout"><span class="k">01</span><span class="t">Bongkar board-nya</span><span class="s">Klik tiap pin, lihat fungsinya</span><span class="arr">↓</span></a>
+      <a href="#cara-kerja"><span class="k">02</span><span class="t">Lihat cara kerjanya</span><span class="s">WiFi, ADC, dan PWM dalam animasi</span><span class="arr">↓</span></a>
+      <a href="#project"><span class="k">03</span><span class="t">11 project siap coba</span><span class="s">Daftar alat, kabel, kode, langsung buka di simulator</span><span class="arr">↓</span></a>
+      <a href="#simulator" class="hero-sim"><span class="k">04</span><span class="t">Simulator + 9 pelajaran</span><span class="s">Belajar dari nol: rakit di breadboard, tulis kode, jalankan</span><span class="arr">→</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="pinout">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Pinout 3D</div>
+      <h2>ESP32 DevKit V1, 30 pin</h2>
+      <p>Drag untuk memutar, scroll atau cubit untuk zoom, klik pin untuk melihat fungsinya. Warna pin menunjukkan seberapa aman pin itu dipakai.</p>
+    </div>
+    <div class="explorer">
+      <div class="stage" id="stage-board">
+        <div class="stage-tools"><button class="btn ghost sm" type="button" data-reset="board">Reset kamera</button></div>
+        <div class="stage-hint">Klik pin mana saja</div>
+      </div>
+      <aside class="pin-side">
+        <div class="panel">
+          <div class="small-label">Tampilkan pin untuk</div>
+          <div class="chips" id="pinFilters"></div>
+          <div class="legend" id="safeLegend" style="margin-top:12px">
+            <span><i class="dot ok"></i>Aman</span><span><i class="dot warn"></i>Ada syarat</span><span><i class="dot bad"></i>Hindari / bukan GPIO</span>
+          </div>
+        </div>
+        <div class="panel pin-card" id="pinCard" aria-live="polite"></div>
+      </aside>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <div class="small-label">Semua pin, urut dari ujung antena ke ujung USB</div>
+      <div class="pinlist">
+        <div><div class="small-label" style="color:var(--fg)">Sisi EN</div><ol id="pinListL"></ol></div>
+        <div><div class="small-label" style="color:var(--fg)">Sisi D23</div><ol id="pinListR"></ol></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kenalan">
+  <div class="wrap">
+    <div class="intro">
+      <div class="sec-head" style="margin:0">
+        <div class="eyebrow">Kenalan</div>
+        <h2>Apa itu ESP32?</h2>
+        <p style="color:var(--fg)">ESP32 adalah mikrokontroler buatan Espressif dengan WiFi dan Bluetooth di dalam satu chip. Board yang paling banyak dijual adalah <b>ESP32 DevKit V1 30 pin</b>, yang kamu putar di atas. Kotak logam besar di ujungnya adalah modul ESP32-WROOM-32: di dalamnya ada chip, memori flash 4 MB, dan antena zig-zag di ujung modul.</p>
+        <p>Kamu memprogramnya di Arduino IDE dengan fungsi yang sama seperti Arduino: <code>pinMode</code>, <code>digitalWrite</code>, <code>analogRead</code>, <code>Serial.println</code>. Perbedaannya ada di tegangan, jumlah fitur, dan beberapa aturan pin.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table class="cmp">
+          <thead><tr><th></th><th>ESP32 DevKit V1</th><th>Arduino Uno</th></tr></thead>
+          <tbody>
+            <tr><td>Prosesor</td><td class="hi">Xtensa LX6 32-bit, 2 core, 240 MHz</td><td>ATmega328P 8-bit, 16 MHz</td></tr>
+            <tr><td>RAM</td><td class="hi">520 KB</td><td>2 KB</td></tr>
+            <tr><td>Flash program</td><td class="hi">4 MB (umumnya)</td><td>32 KB</td></tr>
+            <tr><td>Tegangan logika</td><td class="hi">3.3 V</td><td>5 V</td></tr>
+            <tr><td>WiFi</td><td class="hi">802.11 b/g/n, 2.4 GHz</td><td>Tidak ada</td></tr>
+            <tr><td>Bluetooth</td><td class="hi">Classic + BLE 4.2</td><td>Tidak ada</td></tr>
+            <tr><td>ADC</td><td class="hi">12-bit (0–4095), hingga 18 kanal</td><td>10-bit (0–1023), 6 kanal</td></tr>
+            <tr><td>DAC</td><td class="hi">2 kanal, 8-bit</td><td>Tidak ada</td></tr>
+            <tr><td>Sensor sentuh</td><td class="hi">10 pin</td><td>Tidak ada</td></tr>
+            <tr><td>PWM</td><td class="hi">16 kanal, hampir semua pin</td><td>6 pin</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="h3-gap">Dipakai untuk apa?</h3>
+    <div class="uses" id="uses">
+      <div class="use"><span class="tag">Smart home</span><h3>Kontrol lampu dari HP</h3><p>ESP32 cukup kuat menjalankan web server sendiri. Buka alamat IP-nya di browser HP, tekan tombol, relay menyala.</p><div class="go"><button class="chip" data-go="webled">#7 Web server LED</button><button class="chip" data-go="relay">#9 Relay lampu</button></div></div>
+      <div class="use"><span class="tag">Monitoring</span><h3>Pantau suhu ruangan</h3><p>Baca suhu, kelembapan, atau kelembapan tanah, lalu tampilkan di HP. Dasar dari kebun pintar dan monitor akuarium.</p><div class="go"><button class="chip" data-go="dht">#4 DHT11</button><button class="chip" data-go="dhtweb">#8 Monitor via WiFi</button></div></div>
+      <div class="use"><span class="tag">Keamanan</span><h3>Deteksi gerakan</h3><p>Sensor PIR mendeteksi panas tubuh yang bergerak. Nyalakan lampu, bunyikan alarm, atau kirim notifikasi.</p><div class="go"><button class="chip" data-go="pir">#6 Sensor PIR</button></div></div>
+      <div class="use"><span class="tag">Robotika</span><h3>Robot dan lengan mekanik</h3><p>Atur kecepatan motor dengan PWM, gerakkan servo ke sudut tertentu, hindari halangan dengan sensor jarak.</p><div class="go"><button class="chip" data-go="motor">#11 Motor DC</button><button class="chip" data-go="servo">#10 Servo</button><button class="chip" data-go="sonar">#5 Ultrasonik</button></div></div>
+      <div class="use"><span class="tag">Bluetooth</span><h3>Remote dan wearable</h3><p>BLE hemat daya untuk menghubungkan ESP32 ke aplikasi HP, misalnya remote, gelang, atau sensor detak jantung.</p><div class="go"><button class="chip" data-go-path="1">Topik lanjutan</button></div></div>
+      <div class="use"><span class="tag">Baterai</span><h3>Alat yang ditinggal di lapangan</h3><p>Mode deep sleep membuat chip ESP32 hanya memakai arus orde mikroampere, lalu bangun tiap beberapa menit untuk mengirim data.</p><div class="go"><button class="chip" data-go-path="1">Topik lanjutan</button></div></div>
+    </div>
+
+    <h3 class="h3-gap">Aturan penting kalau kamu pindah dari Arduino</h3>
+    <ul class="rules">
+      <li><b>3.3V</b><span>Logika ESP32 adalah 3.3 V. Jangan beri 5 V langsung ke GPIO. Sinyal dari sensor 5 V perlu pembagi tegangan atau level shifter.</span></li>
+      <li><b>ADC2</b><span>Saat WiFi aktif, pin ADC2 (GPIO 0, 2, 4, 12–15, 25–27) tidak bisa <code>analogRead</code>. Pakai ADC1: GPIO 32–39.</span></li>
+      <li><b>34–39</b><span>GPIO 34, 35, 36 (VP), dan 39 (VN) hanya bisa input dan tidak punya pull-up internal.</span></li>
+      <li><b>0-4095</b><span><code>analogRead</code> menghasilkan 0–4095 (12-bit), bukan 0–1023. Serial Monitor biasanya diset 115200 baud.</span></li>
+      <li><b>BOOT</b><span>Pin strapping (GPIO 0, 2, 5, 12, 15) menentukan mode saat menyala. Jangan beri beban yang menarik pin ini ke level yang salah.</span></li>
+      <li><b>6–11</b><span>GPIO 6–11 dipakai memori flash dan tidak dikeluarkan di board 30 pin. Kalau ada di board lain, jangan dipakai.</span></li>
+      <li><b>20mA</b><span>Arus tiap pin sebaiknya di bawah 20 mA. Motor, relay, dan lampu selalu lewat modul driver, bukan langsung dari pin.</span></li>
+      <li><b>GND</b><span>Kalau memakai catu daya terpisah (baterai motor, adaptor), sambungkan GND-nya ke GND ESP32.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="cara-kerja">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Cara kerja</div>
+      <h2>Apa yang sebenarnya terjadi di dalam</h2>
+      <p>Tiga konsep yang paling sering dipakai di project ESP32. Pilih topik, lalu mainkan kontrol di samping.</p>
+    </div>
+    <div class="tabs" role="tablist" id="howTabs">
+      <button class="tab" role="tab" data-how="wifi" aria-selected="true">WiFi</button>
+      <button class="tab" role="tab" data-how="adc" aria-selected="false">Membaca analog (ADC)</button>
+      <button class="tab" role="tab" data-how="pwm" aria-selected="false">PWM</button>
+    </div>
+    <div class="how">
+      <div class="stage" id="stage-how">
+        <div class="stage-tools"><button class="btn ghost sm" type="button" data-reset="how">Reset kamera</button></div>
+      </div>
+      <aside class="how-side">
+        <div class="panel how-side" data-how-panel="wifi">
+          <h3>ESP32 bicara lewat WiFi</h3>
+          <p>Radio WiFi 2.4 GHz ada di dalam chip, dan antenanya adalah jalur zig-zag di ujung modul. Ada dua mode yang paling sering dipakai.</p>
+          <div class="chips" id="wifiMode">
+            <button class="chip" data-mode="sta" aria-pressed="true">Station (STA)</button>
+            <button class="chip" data-mode="ap" aria-pressed="false">Access Point (AP)</button>
+          </div>
+          <ol class="steps-live" id="wifiSteps"></ol>
+          <pre class="mini-code" id="wifiCode"></pre>
+          <p class="note">ESP32 hanya bisa tersambung ke WiFi 2.4 GHz. Kalau router kamu dual-band, pastikan nama WiFi 2.4 GHz-nya aktif.</p>
+        </div>
+        <div class="panel how-side" data-how-panel="adc" hidden>
+          <h3>ADC mengubah tegangan jadi angka</h3>
+          <p>Potensiometer membagi tegangan 3.3 V. ADC 12-bit mengukur tegangan di pin D34 dan mengubahnya jadi angka 0–4095. Dua belas kotak di atas adalah 12 bit angka itu.</p>
+          <div class="field"><label for="adcSlider">Putar potensiometer <b id="adcPct">50%</b></label><input type="range" id="adcSlider" min="0" max="1000" value="500"></div>
+          <label class="check"><input type="checkbox" id="adcAuto"> Putar otomatis</label>
+          <div class="readouts">
+            <div class="ro"><b id="adcV">1.65 V</b><span>Tegangan pin</span></div>
+            <div class="ro"><b id="adcRaw">2048</b><span>analogRead(34)</span></div>
+          </div>
+          <div class="ro"><b id="adcBin" style="font-size:16px;letter-spacing:.06em">100000000000</b><span>Dalam biner (12 bit)</span></div>
+          <pre class="mini-code">// angka mentah 0–4095
+int nilai = analogRead(34);
+// perkiraan tegangan
+float volt = nilai * 3.3 / 4095.0;
+// lebih akurat, dalam milivolt
+int mv = analogReadMilliVolts(34);</pre>
+          <p class="note">ADC ESP32 kurang linear di dekat 0 V dan 3.3 V. Untuk nilai tegangan, <code>analogReadMilliVolts()</code> memakai kalibrasi pabrik sehingga lebih akurat.</p>
+        </div>
+        <div class="panel how-side" data-how-panel="pwm" hidden>
+          <h3>PWM: pura-pura analog</h3>
+          <p>Kebanyakan pin ESP32 hanya bisa HIGH (3.3 V) atau LOW (0 V). PWM menyalakan dan mematikan pin sangat cepat. Persentase waktu HIGH disebut <b>duty cycle</b>, dan rata-ratanya terasa seperti tegangan lebih rendah.</p>
+          <div class="field"><label for="pwmSlider">Duty cycle <b id="pwmPct">30%</b></label><input type="range" id="pwmSlider" min="0" max="100" value="30"></div>
+          <label class="check"><input type="checkbox" id="pwmSlow" checked> Mode lambat (2 Hz), supaya kedipannya terlihat</label>
+          <div class="readouts">
+            <div class="ro"><b id="pwmVal">77</b><span>ledcWrite (0–255)</span></div>
+            <div class="ro"><b id="pwmAvg">0.99 V</b><span>Tegangan rata-rata</span></div>
+          </div>
+          <pre class="mini-code">// pin 18, 5 kHz, resolusi 8-bit
+ledcAttach(18, 5000, 8);
+// 77 dari 255 = duty 30%
+ledcWrite(18, 77);</pre>
+          <p class="note">Matikan mode lambat. Pada 5 kHz mata tidak bisa melihat kedipan, jadi LED terlihat redup dan stabil. Cara yang sama dipakai untuk mengatur kecepatan motor.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Project lab</div>
+      <h2>11 project, dari LED sampai motor</h2>
+      <p>Tiap project berisi daftar alat, sambungan kabel, dan kode siap upload. Tekan <b>Buka di simulator</b> untuk merakit dan menjalankannya tanpa alat asli. Kode ditulis untuk paket board <b>esp32 by Espressif versi 3.x</b>.</p>
+    </div>
+    <div class="lab">
+      <nav class="plist" id="plist" aria-label="Daftar project"></nav>
+      <div class="lab-main">
+        <div class="lab-head">
+          <div><div class="eyebrow" id="pCat"></div><h3 id="pTitle" style="font-size:26px;margin-top:4px"></h3><p id="pDesc"></p></div>
+          <div class="lab-acts"><button class="btn accent" type="button" id="pSim">▶ Buka di simulator</button><button class="btn ghost" type="button" id="pDone">Tandai selesai</button></div>
+        </div>
+        <div class="tabs" role="tablist" id="labTabs">
+          <button class="tab" role="tab" data-lab="wiring" aria-selected="true">Rangkaian</button>
+          <button class="tab" role="tab" data-lab="code" aria-selected="false">Kode</button>
+        </div>
+        <div class="wiring" data-lab-panel="wiring">
+          <div class="panel" style="display:grid;gap:14px;align-content:start">
+            <div><div class="small-label">Komponen</div><ul class="parts" id="pParts"></ul></div>
+            <div id="pLibsWrap"><div class="small-label">Library (Sketch → Include Library → Manage Libraries)</div><ul class="parts" id="pLibs"></ul></div>
+          </div>
+          <div class="panel" style="display:grid;gap:12px;align-content:start">
+            <div class="small-label" style="margin:0">Sambungan kabel</div>
+            <div style="overflow-x:auto"><table class="wt"><thead><tr><th>Dari</th><th>Ke</th></tr></thead><tbody id="pWiring"></tbody></table></div>
+            <p class="note" id="pNote"></p>
+            <p class="note warn" id="pNoSim" hidden>Project WiFi ini tidak bisa dijalankan di simulator. Upload kodenya ke board asli, lalu buka alamat IP-nya dari HP.</p>
+          </div>
+        </div>
+        <div data-lab-panel="code" hidden>
+          <div class="code">
+            <div class="code-bar"><span id="codeName">sketch.ino</span><span>Board: ESP32 Dev Module</span></div>
+            <button class="copy" type="button" id="copyBtn">Salin</button>
+            <pre><code id="codeOut"></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mulai">
+  <div class="wrap">
+    <div class="start">
+      <div>
+        <div class="sec-head">
+          <div class="eyebrow">Mulai di laptop</div>
+          <h2 id="setup">Siapkan Arduino IDE untuk ESP32</h2>
+        </div>
+        <ol class="steps">
+          <li><div><b>Install Arduino IDE 2</b><p>Unduh dari arduino.cc. Kalau sudah punya, lanjut ke langkah berikutnya.</p></div></li>
+          <li><div><b>Tambahkan alamat board ESP32</b><p>File → Preferences → <i>Additional boards manager URLs</i>, tempel alamat ini:</p>
+            <div class="urlbox"><code id="boardUrl">https://espressif.github.io/arduino-esp32/package_esp32_index.json</code><button class="btn ghost sm" type="button" id="copyUrl">Salin</button></div></div></li>
+          <li><div><b>Install paket board</b><p>Tools → Board → Boards Manager, cari <b>esp32</b>, install <b>esp32 by Espressif Systems</b> (versi 3.x).</p></div></li>
+          <li><div><b>Colok board</b><p>Pakai kabel USB data, bukan kabel charge saja. Kalau port tidak muncul, install driver <b>CP210x</b> atau <b>CH340</b> sesuai chip USB di board kamu.</p></div></li>
+          <li><div><b>Pilih board dan port</b><p>Tools → Board → <b>ESP32 Dev Module</b>, lalu Tools → Port. Kalau upload sering gagal, turunkan Upload Speed ke 115200.</p></div></li>
+          <li><div><b>Upload</b><p>Kalau muncul <code>Connecting.....</code> terus-menerus, tahan tombol <b>BOOT</b> di board sampai persentase upload mulai berjalan.</p></div></li>
+        </ol>
+      </div>
+      <div>
+        <div class="sec-head">
+          <div class="eyebrow">Jalur belajar</div>
+          <h2>Urutan yang disarankan</h2>
+          <p>Centang project yang sudah kamu coba di board asli. Progres tersimpan di browser ini.</p>
+        </div>
+        <div class="path" id="path"></div>
+        <div class="progress"><i id="progBar"></i></div>
+        <p style="font-size:14px;color:var(--muted);margin:6px 0 0" id="progText"></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<section id="simView" class="sim-view" hidden aria-label="Simulator"></section>
+
+<footer>
+  <div class="wrap">Simulasi di halaman ini menyederhanakan dunia nyata: nilai sensor, waktu, dan perilaku modul bisa sedikit berbeda di board asli. Selalu cek datasheet modul yang kamu pakai.</div>
+</footer>

@@ -1,0 +1,63 @@
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect x='6' y='6' width='14' height='14' rx='2' fill='none' stroke='%23b15f19' stroke-width='2'/%3E%3Crect x='10' y='10' width='6' height='6' fill='%23b15f19'/%3E%3Cpath d='M9 2v4M13 2v4M17 2v4M9 20v4M13 20v4M17 20v4M2 9h4M2 13h4M2 17h4M20 9h4M20 13h4M20 17h4' stroke='%23b15f19' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html" title="Kembali ke ESP32 Lab">
+      <svg width="24" height="24" viewBox="0 0 26 26" aria-hidden="true"><rect x="6" y="6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="10" width="6" height="6" fill="var(--accent)"/><path d="M9 2v4M13 2v4M17 2v4M9 20v4M13 20v4M17 20v4M2 9h4M2 13h4M2 17h4M20 9h4M20 13h4M20 17h4" stroke="currentColor" stroke-width="2"/></svg>
+      ESP32 Lab <small>Simulator</small>
+    </a>
+    <a class="back" href="index.html">← Materi belajar</a>
+    <span class="sp"></span>
+    <select class="sel" id="exSel" aria-label="Buka contoh"></select>
+    <button class="btn run" type="button" id="runBtn" title="Ctrl + Enter">▶ Jalankan</button>
+    <button class="btn stop" type="button" id="stopBtn" hidden>■ Stop</button>
+    <span class="state" id="runState">Berhenti</span>
+    <span class="time" id="runTime">0.0 dtk</span>
+    <div class="lang-sw" role="group" aria-label="Bahasa"><span aria-current="true">ID</span><a href="simulator-en.html" hreflang="en" lang="en">EN</a></div>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="Ganti tema terang/gelap"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+<main class="wrap">
+  <div class="rack" id="rack" aria-label="Rak komponen"></div>
+  <div class="grid">
+    <div class="stage" id="stage-sim">
+      <div class="tools">
+        <div class="toolbox"><span class="t">Kabel</span><div class="swatches" id="wireColors"></div></div>
+        <div class="toolbox seg" id="viewSeg" role="group" aria-label="Tampilan"><button type="button" data-view="3d" aria-pressed="true">3D</button><button type="button" data-view="2d" aria-pressed="false">2D</button></div>
+        <span class="sp"></span>
+        <label class="toolbox check"><input type="checkbox" id="soundOn"> Suara</label>
+        <label class="toolbox check"><input type="checkbox" id="labelsOn" checked> Label</label>
+        <button class="btn ghost sm" type="button" data-reset="sim">Reset kamera</button>
+        <button class="btn ghost sm" type="button" id="clearBtn">Kosongkan</button>
+      </div>
+      <div class="hint">Klik atau tarik dari lubang/pin ke tujuan untuk pasang kabel · drag komponen · R putar · Del hapus</div>
+    </div>
+    <div class="codep">
+      <div class="code-bar"><b>sketch.ino</b><span>ESP32 Dev Module</span><span class="sp"></span><button type="button" id="copyCode">Salin kode</button></div>
+      <div class="editor">
+        <div class="gutter-box"><div id="gutter"></div></div>
+        <div class="ed-box"><pre aria-hidden="true"><code id="codeHL"></code></pre><textarea id="code" spellcheck="false" autocomplete="off" autocapitalize="off" wrap="off" aria-label="Editor kode Arduino"></textarea></div>
+      </div>
+      <p class="code-err" id="codeErr" hidden></p>
+    </div>
+    <div class="panel">
+      <div class="tabs" role="tablist" id="insTabs">
+        <button class="tab" role="tab" data-ins="learn" aria-selected="true">Belajar</button>
+        <button class="tab" role="tab" data-ins="sel" aria-selected="false">Komponen</button>
+        <button class="tab" role="tab" data-ins="prob" aria-selected="false">Pemeriksa <span id="probN"></span></button>
+      </div>
+      <div class="scroll" id="insLearn" data-ins-panel="learn"></div>
+      <div class="scroll" id="insSel" data-ins-panel="sel" hidden></div>
+      <div class="scroll" id="insProb" data-ins-panel="prob" hidden></div>
+    </div>
+    <div class="serial-wrap">
+      <div class="serial-bar"><span>Serial Monitor · 115200 baud</span><span class="sp"></span><label><input type="checkbox" id="autoScroll" checked> gulir otomatis</label><button type="button" id="serialClear2">Bersihkan</button></div>
+      <div class="serial" id="simSerial" aria-live="off"></div>
+      <form class="serial-form" id="serialForm2"><input id="serialIn2" autocomplete="off" placeholder="Kirim teks ke ESP32" maxlength="80"><select id="lineEnd" aria-label="Akhir baris"><option value="nl">Newline</option><option value="none">Tanpa</option></select><button class="btn sm accent" type="submit">Kirim</button></form>
+    </div>
+  </div>
+</main>

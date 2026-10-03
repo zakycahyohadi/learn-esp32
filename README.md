@@ -44,13 +44,43 @@ The example code targets the **esp32 by Espressif v3.x** board package in the Ar
 
 ## Run it locally
 
-Everything lives in a single `index.html` file — no build step, no server needed. Just open it in a browser, or serve it:
+There's no build step, but the page loads its parts with `fetch()`, so it needs a small local server. Double-clicking `index.html` won't work. In the project folder, run:
 
 ```bash
 python3 -m http.server 8000
 ```
 
 Then visit http://localhost:8000.
+
+## Project structure
+
+The code is split by purpose so it's easy to read and learn from:
+
+```
+index.html              Page shell: <head>, CDN scripts, and an empty #app-root
+css/
+  main.css              Styles for the main page
+  sim.css               Styles for the simulator
+js/
+  app.js                Start here: loads the language files and wires up the page
+  main.js               Main page logic: 3D pinout, animations, projects, language switching
+  sim.js                The simulator: breadboard, wires, circuit solver, Arduino interpreter
+lang/
+  id/main.html          Main page content in Indonesian
+  en/main.html          Main page content in English
+  id/sim.html           Simulator layout in Indonesian
+  en/sim.html           Simulator layout in English
+examples/
+  id/*.ino              Arduino code for the 11 projects (Indonesian comments)
+  en/*.ino              The same code with English comments
+.github/workflows/
+  pages.yml             Deploys the site to GitHub Pages on every push to main
+```
+
+How the two languages work:
+- `lang/id/` and `lang/en/` hold the same HTML with translated text. The two files must keep the same element structure, because the language switch swaps the text node by node without reloading the page. When you edit one, make the same change in the other.
+- Text generated from JavaScript is written as pairs, `_L('Indonesian', 'English')`, inside `js/main.js` and `js/sim.js`.
+- The `.ino` files open directly in the Arduino IDE, so you can upload them to a real ESP32.
 
 Notes:
 - Uses [three.js](https://threejs.org) r128 from a CDN, so an internet connection is required.
