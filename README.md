@@ -46,13 +46,35 @@ The example code targets the **esp32 by Espressif v3.x** board package in the Ar
 
 ## Run it locally
 
-There's no build step, but the page loads its parts with `fetch()`, so it needs a small local server. Double-clicking `index.html` won't work. In the project folder, run:
+The page loads its parts with `fetch()`, so it needs a small local server. Double-clicking `index.html` won't work.
+
+**While editing**, serve the source folder directly (no build needed):
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then visit http://localhost:8000.
+**To see the published version** (prerendered pages, guide pages, sitemap), build it first. Node.js 18+ is enough, no `npm install`:
+
+```bash
+node tools/build.mjs     # writes the finished site to _site/
+node tools/check.mjs     # checks links, JSON-LD, titles and descriptions
+cd _site && python3 -m http.server 8000
+```
+
+Then visit http://localhost:8000. GitHub Actions runs the same two commands on every push and deploys `_site/`.
+
+## Pages for search engines
+
+`tools/build.mjs` turns the single-page app into pages Google can read without running JavaScript:
+
+- `/` and `/en/`: the home page with its text already in the HTML. The ID/EN buttons still swap the language instantly and also switch the address.
+- `/project/<slug>/` and `/en/project/<slug>/`: a guide for each of the 11 projects (parts, wiring, full code, how it works, common problems, a button that opens it in the simulator).
+- `/belajar/<slug>/` and `/en/learn/<slug>/`: a page for each of the 9 lessons.
+- `/jebakan-esp32/` and `/en/esp32-pitfalls/`: an article about common ESP32 pitfalls.
+- `sitemap.xml`, `robots.txt`, canonical and hreflang links, Open Graph tags and JSON-LD on every page.
+
+Project and lesson data come straight from `js/main.js`, `js/sim.js` and `examples/`. Extra text for these pages lives in `content/`.
 
 ## Project structure
 
@@ -75,8 +97,17 @@ lang/
 examples/
   id/*.ino              Arduino code for the 11 projects (Indonesian comments)
   en/*.ino              The same code with English comments
+content/
+  site.mjs              Shared labels, home page title and description
+  projects.mjs          Extra text for each project guide page
+  lessons.mjs           Extra text for each lesson page
+  pitfalls.mjs          The ESP32 pitfalls article
+tools/
+  build.mjs             Builds the published site into _site/
+  check.mjs             Checks the build (links, JSON-LD, meta tags)
+img/og.jpg              Preview image for search results and social media
 .github/workflows/
-  pages.yml             Deploys the site to GitHub Pages on every push to main
+  pages.yml             Builds, checks and deploys the site on every push to main
 ```
 
 How the two languages work:

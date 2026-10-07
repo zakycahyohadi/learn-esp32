@@ -23,10 +23,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
-      - name: Stamp file versions (cache busting)
-        run: sed -i "s/?v=dev/?v=${GITHUB_SHA::7}/g" index.html
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # build: prerender beranda, halaman panduan, sitemap; versi file diambil dari GITHUB_SHA
+      - name: Build site
+        run: node tools/build.mjs
+      # deploy dibatalkan kalau ada link rusak, JSON-LD tidak valid, atau meta tag bermasalah
+      - name: Check site
+        run: node tools/check.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

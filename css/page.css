@@ -1,0 +1,76 @@
+/* Halaman panduan statis (project, pelajaran, artikel, daftar) buatan tools/build.mjs.
+   Dipakai bersama css/main.css; file ini hanya menambah tata letak artikel. */
+.doc{max-width:860px;margin:0 auto;padding:24px 20px 56px}
+.doc section{padding-block:0;margin-top:44px}
+.doc h1{font-size:clamp(30px,4.6vw,46px);line-height:1.1;margin:10px 0 14px}
+.doc h2{font-size:clamp(22px,2.6vw,28px);margin:0 0 12px}
+.doc h3{font-size:17px;margin:18px 0 8px}
+.doc p,.doc li,.doc dd{line-height:1.7}
+.doc p{margin:0 0 12px}
+.doc ul,.doc ol{padding-left:22px;margin:0 0 12px}
+.doc a{color:var(--accent)}
+.doc .lede{font-size:18px;color:var(--muted);margin:0}
+.doc .muted{color:var(--muted);font-size:14px}
+.doc .note{margin-top:14px}
+.doc .btn{text-decoration:none}
+
+/* breadcrumb */
+.crumbs ol{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px;padding:0;font-size:13.5px;color:var(--muted)}
+.crumbs li+li::before{content:"›";margin-right:6px}
+.crumbs a{color:var(--muted);text-decoration:none}
+.crumbs a:hover{color:var(--fg);text-decoration:underline}
+
+.doc-cta{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 0}
+.doc-cta .note{flex-basis:100%}
+
+/* tabel kabel */
+.doc table{width:100%;border-collapse:collapse;font-size:15px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.doc th,.doc td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.doc thead th{font:600 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+.doc tr:last-child td{border-bottom:0}
+.doc td:first-child{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
+.tbl{overflow-x:auto}
+
+/* kode */
+.code-wrap{position:relative}
+.doc pre{background:var(--code-bg);color:var(--code-fg);padding:16px;border-radius:12px;overflow-x:auto;font:13.5px/1.6 var(--f-mono);margin:0 0 12px;white-space:pre;tab-size:2}
+.doc pre code{background:none;border:0;padding:0;font:inherit;color:inherit}
+.code-wrap .copy{position:absolute;top:10px;right:10px}
+
+/* masalah umum */
+.faq{margin:0}
+.faq dt{font-weight:600;margin-top:18px}
+.faq dt:first-child{margin-top:0}
+.faq dd{margin:4px 0 0;color:var(--muted)}
+
+/* daftar kartu (project terkait, daftar project/pelajaran) */
+.cards{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.cards a{display:block;height:100%;box-sizing:border-box;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-decoration:none;color:var(--fg)}
+.cards a:hover{border-color:var(--accent)}
+.cards b{display:block}
+.cards small{display:block;color:var(--muted);margin-top:4px;font-size:13.5px;line-height:1.5}
+.cards .k{font:600 12px var(--f-mono);color:var(--accent)}
+
+/* sebelumnya / berikutnya */
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:44px}
+.pager a{display:block;padding:14px 16px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--fg);background:var(--surface)}
+.pager a:hover{border-color:var(--accent)}
+.pager small{display:block;color:var(--muted);font-size:13px}
+.pager .next{text-align:right;grid-column:2}
+
+/* daftar isi artikel */
+.toc{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 20px;margin-top:28px}
+.toc b{display:block;margin-bottom:6px}
+.toc ol{margin:0}
+
+/* tombol bahasa berupa link ke halaman versi bahasa lain */
+.lang-sw [aria-current]{background:var(--fg);color:var(--bg);cursor:default}
+.lang-sw a:hover:not([aria-current]){color:var(--fg);background:var(--surface-2)}
+
+@media (max-width:760px){
+  body.doc-page{padding-bottom:0}
+  .doc{padding:18px 16px 44px}
+  .pager{grid-template-columns:1fr}
+  .pager .next{grid-column:auto}
+  .doc td:first-child{white-space:normal}
+}

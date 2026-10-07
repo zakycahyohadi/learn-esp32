@@ -65,7 +65,7 @@
     <div class="sec-head">
       <div class="eyebrow">Pinout 3D</div>
       <h2>ESP32 DevKit V1, 30 pin</h2>
-      <p>Drag to rotate, scroll or pinch to zoom, click a pin to see what it does. Pin colours show how safe each pin is to use.</p>
+      <p>Drag to rotate, scroll or pinch to zoom, click a pin to see what it does. Pin colours show how safe each pin is to use. <a href="en/esp32-pitfalls/">Which pins can stop the ESP32 from booting?</a></p>
     </div>
     <div class="explorer">
       <div class="stage" id="stage-board">
@@ -142,6 +142,7 @@
       <li><b>20mA</b><span>Keep each pin under about 20 mA. Motors, relays, and lamps always go through a driver module, never straight from a pin.</span></li>
       <li><b>GND</b><span>When you use a separate power supply (motor battery, adapter), connect its GND to the ESP32 GND.</span></li>
     </ul>
+    <p class="more-link"><a href="en/esp32-pitfalls/">Read the full guide: 6 ESP32 pitfalls that trip up beginners →</a></p>
   </div>
 </section>
 
@@ -222,7 +223,7 @@ ledcWrite(18, 77);</pre>
       <nav class="plist" id="plist" aria-label="Project list"></nav>
       <div class="lab-main">
         <div class="lab-head">
-          <div><div class="eyebrow" id="pCat"></div><h3 id="pTitle" style="font-size:26px;margin-top:4px"></h3><p id="pDesc"></p></div>
+          <div><div class="eyebrow" id="pCat"></div><h3 id="pTitle" style="font-size:26px;margin-top:4px"></h3><p id="pDesc"></p><a class="guide-link" id="pGuide" href="#project">Full guide: circuit, code, and common problems →</a></div>
           <div class="lab-acts"><button class="btn accent" type="button" id="pSim">▶ Open in simulator</button><button class="btn ghost" type="button" id="pDone">Mark as done</button></div>
         </div>
         <div class="tabs" role="tablist" id="labTabs">

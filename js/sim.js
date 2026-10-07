@@ -2606,6 +2606,9 @@ void loop() {
   onLang(hudText);
 
   /* ---- dibuka dari halaman materi: muat rangkaian contoh + kode project ---- */
+  // dipanggil js/app.js untuk link langsung #simulator/belajar/<id> dari halaman pelajaran
+  window.__simLesson=id=>{const i=LESSONS.findIndex(x=>x.id===id);if(i<0)return false;const t=document.querySelector('#insTabs [data-ins="learn"]');if(t)t.click();
+    stripOff=false;LS.viaAnswer=false;LS.i=i;LS.hint=false;lsSave();renderLessons();lsEl.scrollTop=0;return true;};
   window.__simOpen=(key,code)=>{const x=EXAMPLES.find(q=>q[0]===key);if(!x)return false;
     stop(true);loadDesign(x[2](),true);S.exKey=x[0];
     if(code){ed.value=String(code);S.codeSrc=null;S.exKey=null;clearCodeErr();paintEditor();}

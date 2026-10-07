@@ -1,28 +1,37 @@
 /* ============ ESP32 Lab: pemuat halaman ============
    Urutan kerja:
-   1. Tentukan bahasa (id/en) dari localStorage.
-   2. Ambil isi halaman kedua bahasa (lang/<bahasa>/main.html) dan kode contoh (examples/<bahasa>/*.ino).
-   3. Tempel bahasa aktif ke #app-root. Bahasa lainnya disimpan di __esp32lab.alt supaya js/main.js
-      bisa menukar teks tanpa memuat ulang halaman.
-   4. Jalankan js/main.js.
-   5. Simulator (lang/<bahasa>/sim.html + css/sim.css + js/sim.js) baru dibuat dalam iframe saat dibuka.
+   1. Tentukan bahasa. Di hasil build (tools/build.mjs) isi halaman sudah tertulis di HTML
+      (#app-root[data-prerender="id|en"]) dan bahasanya mengikuti alamat: / = Indonesia, /en/ = English.
+      Saat dijalankan langsung dari kode sumber, isi diambil dengan fetch() dan bahasanya dari localStorage.
+   2. Ambil versi bahasa lainnya (lang/<bahasa>/main.html + examples/<bahasa>/*.ino) dan simpan di
+      __esp32lab.alt supaya js/main.js bisa menukar teks tanpa memuat ulang halaman.
+   3. Jalankan js/main.js.
+   4. Simulator (lang/<bahasa>/sim.html + css/sim.css + js/sim.js) baru dibuat dalam iframe saat dibuka.
    File diambil dengan fetch(), jadi halaman harus dibuka lewat server (GitHub Pages atau
    `python3 -m http.server`), bukan dengan klik dua kali file index.html. */
 (async function(){
-  // versi file: "dev" di komputer, diganti kode commit saat deploy (.github/workflows/pages.yml)
-  // supaya browser selalu mengambil file terbaru setelah update, bukan campuran file lama dan baru
-  var V=((document.currentScript&&document.currentScript.src.match(/[?&]v=([^&#]+)/))||[])[1]||'dev';
+  // versi file: "dev" di komputer, diganti kode commit saat build supaya browser selalu mengambil
+  // file terbaru setelah update, bukan campuran file lama dan baru
+  var SRC=(document.currentScript&&document.currentScript.src)||'';
+  var V=(SRC.match(/[?&]v=([^&#]+)/)||[])[1]||'dev';
   var Q='?v='+V;
+  // alamat folder utama situs (tempat css/, js/, lang/), dihitung dari lokasi app.js
+  // supaya halaman di subfolder seperti /en/ tetap menemukan file-filenya
+  var ROOT=SRC?SRC.replace(/js\/app\.js(?:[?#].*)?$/,''):new URL('./',location.href).href;
   var get=function(k){try{return localStorage.getItem(k);}catch(e){return null;}};
   var set=function(k,v){try{localStorage.setItem(k,v);}catch(e){}};
-  var lang=get('esp32lab-lang');
-  if(!lang&&typeof window.name==='string'&&window.name.indexOf('esp32lang:')===0)lang=window.name.slice(10);
+  var root=document.getElementById('app-root');
+  var pre=root.getAttribute('data-prerender');
+  var lang=pre;
+  if(!lang){
+    lang=get('esp32lab-lang');
+    if(!lang&&typeof window.name==='string'&&window.name.indexOf('esp32lang:')===0)lang=window.name.slice(10);
+  }
   if(lang!=='en')lang='id';
   var other=function(l){return l==='en'?'id':'en';};
   document.documentElement.lang=lang;
   // terapkan tema pilihan sejak awal supaya tidak berkedip sebelum main.js jalan
   try{var th=JSON.parse(get('esp32lab-theme'));if(th==='dark'||th==='light')document.documentElement.setAttribute('data-theme',th);}catch(e){}
-  var root=document.getElementById('app-root');
 
   // three.js mulai dimuat sekarang, paralel dengan isi halaman; js/main.js menunggunya sebelum jalan
   function loadScript(src){return new Promise(function(ok,fail){var s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=fail;document.head.appendChild(s);});}
@@ -39,35 +48,54 @@
     if(document.readyState==='complete')setTimeout(startGC,0);else window.addEventListener('load',startGC);
   }
 
+  // link ke halaman lain (bukan #anchor) dijadikan alamat lengkap. Link di lang/*.html ditulis relatif
+  // terhadap folder utama, jadi harus diselesaikan terhadap ROOT, bukan terhadap halaman yang sedang dibuka.
+  function fixLinks(node,base){Array.prototype.forEach.call(node.querySelectorAll('a[href]'),function(a){var h=a.getAttribute('href');
+    if(!h||h.charAt(0)==='#'||/^[a-z]+:/i.test(h))return;a.setAttribute('href',new URL(h,base).href);});}
+
   // kode Arduino tiap project, urutannya sama untuk kedua bahasa
   var EXAMPLES=['blink','button','fade','dht','sonar','pir','webled','dhtweb','relay','servo','motor'];
-  function load(path){return fetch(path).then(function(r){if(!r.ok)throw new Error(path+' ('+r.status+')');return r.text();});}
+  function load(path){return fetch(ROOT+path+Q).then(function(r){if(!r.ok)throw new Error(path+' ('+r.status+')');return r.text();});}
   function frag(html){var t=document.createElement('template');t.innerHTML=html;return t.content;}
   // isi halaman + kode contoh sebagai <script type="text/plain" id="code-..."> (dibaca codeOf() di main.js)
   async function page(l){
-    var res=await Promise.all([load('lang/'+l+'/main.html'+Q)].concat(EXAMPLES.map(function(n){return load('examples/'+l+'/'+n+'.ino'+Q);})));
+    var res=await Promise.all([load('lang/'+l+'/main.html')].concat(EXAMPLES.map(function(n){return load('examples/'+l+'/'+n+'.ino');})));
     var f=frag(res[0]);
     EXAMPLES.forEach(function(n,i){var s=document.createElement('script');s.type='text/plain';s.id='code-'+n;s.textContent='\n'+res[i+1];f.appendChild(s);});
+    fixLinks(f,ROOT);
     return f;
   }
   var alt,simHtml={};
-  // semua file diunduh paralel, tapi bahasa aktif langsung ditempel begitu siap supaya teks cepat tampil
-  var pCur=page(lang),pRest=Promise.all([page(other(lang)),load('lang/id/sim.html'+Q),load('lang/en/sim.html'+Q)]);
+  // semua file diunduh paralel; tanpa prerender, bahasa aktif langsung ditempel begitu siap supaya teks cepat tampil
+  var pCur=pre?null:page(lang),pRest=Promise.all([page(other(lang)),load('lang/id/sim.html'),load('lang/en/sim.html')]);
   pRest.catch(function(){});
+  if(pre)fixLinks(root,location.href);
   try{
-    root.appendChild(await pCur);
+    if(pCur)root.appendChild(await pCur);
     var rest=await pRest;
     alt=rest[0];simHtml.id=rest[1];simHtml.en=rest[2];
   }catch(e){
     console.error(e);
-    root.innerHTML='<p style="max-width:640px;margin:15vh auto;padding:0 16px;font:16px/1.6 system-ui,sans-serif">'
+    // halaman hasil prerender tetap bisa dibaca walaupun file tambahan gagal dimuat
+    if(!pre)root.innerHTML='<p style="max-width:640px;margin:15vh auto;padding:0 16px;font:16px/1.6 system-ui,sans-serif">'
       +'Gagal memuat file halaman. Jalankan server lokal di folder ini dengan <code>python3 -m http.server 8000</code>, lalu buka http://localhost:8000.<br><br>'
       +'Could not load the page files. Start a local server in this folder with <code>python3 -m http.server 8000</code>, then open http://localhost:8000.</p>';
-    return;
+    if(!pre)return;
+  }
+
+  // di hasil build, / dan /en/ adalah dua alamat untuk halaman yang sama; ganti bahasa ikut mengganti alamat dan judul tab
+  var HOME=new URL(ROOT).pathname;
+  function syncUrl(l){
+    if(!pre)return;
+    var p=location.pathname.replace(/index\.html$/,'');
+    if(p!==HOME&&p!==HOME+'en/')return;
+    history.replaceState(null,'',(l==='en'?HOME+'en/':HOME)+location.search+location.hash);
+    var t=document.documentElement.getAttribute('data-title-'+l);if(t)document.title=t;
   }
 
   var API=window.__esp32lab={lang:lang,
     alt:alt,
+    root:ROOT,
     setLang:function(l){
       l=l==='en'?'en':'id';if(l===API.lang)return;
       API.lang=l;set('esp32lab-lang',l);window.name='esp32lang:'+l;
@@ -75,6 +103,7 @@
       if(window.__langHook)window.__langHook(l);
       if(frame&&frame.contentWindow&&frame.contentWindow.__langHook){try{frame.contentWindow.__langHook(l);}catch(e){console.error(e);}}
       var fl=document.querySelector('iframe');if(fl)fl.title=l==='en'?'ESP32 simulator':'Simulator ESP32';
+      syncUrl(l);
     },
     showView:showView,
     openSim:function(key,code){track('sim-project-'+key,'Project dibuka di simulator: '+key);showView('sim');var n=0;(function go(){n++;try{var w=frame&&frame.contentWindow;if(w&&w.__simOpen&&w.__simOpen(key,code))return;}catch(e){}if(n<100)setTimeout(go,100);})();}};
@@ -82,7 +111,7 @@
   // beri browser kesempatan menggambar teks dulu, baru tunggu three.js dan jalankan main.js
   await new Promise(function(ok){requestAnimationFrame(function(){setTimeout(ok,0);});});
   await three3d;
-  await loadScript('js/main.js'+Q);
+  await loadScript(ROOT+'js/main.js'+Q);
 
   var view='main',frame=null;
   function els(){return [root.querySelector('header.hero'),root.querySelector('main'),root.querySelector('footer')];}
@@ -93,19 +122,26 @@
     setCur(sim?'#simulator':curSec);
     if(sim&&!frame){
       track('simulator','Simulator dibuka');
-      // simulator berjalan di iframe terpisah; path relatif (css/, js/) tetap mengacu ke folder halaman ini
+      // simulator berjalan di iframe terpisah; semua file memakai alamat lengkap dari ROOT
       var l=API.lang,T='<scr'+'ipt';
       frame=document.createElement('iframe');frame.title=l==='en'?'ESP32 simulator':'Simulator ESP32';
       frame.addEventListener('load',syncTheme);
-      frame.srcdoc='<!doctype html><html lang="'+l+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ESP32 Simulator</title><link rel="stylesheet" href="css/sim.css'+Q+'"></head><body>'
+      frame.srcdoc='<!doctype html><html lang="'+l+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ESP32 Simulator</title><link rel="stylesheet" href="'+ROOT+'css/sim.css'+Q+'"></head><body>'
         +simHtml[l]
         +'<template id="alt-static">'+simHtml[other(l)]+'</template>'
         +T+' src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></scr'+'ipt>'
         +T+' src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></scr'+'ipt>'
-        +T+' src="js/sim.js'+Q+'"></scr'+'ipt></body></html>';
+        +T+' src="'+ROOT+'js/sim.js'+Q+'"></scr'+'ipt></body></html>';
       box.appendChild(frame);}
     if(sim){window.scrollTo(0,0);if(location.hash!=='#simulator')history.replaceState(null,'','#simulator');}
     else if(location.hash==='#simulator')history.replaceState(null,'',location.pathname+location.search);
+  }
+  // link langsung dari halaman panduan: #simulator/project/<id> atau #simulator/belajar/<id>
+  function openFromHash(){
+    var m=location.hash.match(/^#simulator(?:\/(project|belajar|learn)\/([\w-]+))?$/);if(!m)return;
+    if(m[1]==='project'){if(API.openProject&&API.openProject(m[2]))return;showView('sim');return;}
+    showView('sim');
+    if(m[2]){var n=0;(function go(){n++;try{var w=frame&&frame.contentWindow;if(w&&w.__simLesson&&w.__simLesson(m[2]))return;}catch(e){}if(n<100)setTimeout(go,100);})();}
   }
   // tandai menu yang aktif (menu bawah di HP)
   var curSec='';
@@ -128,6 +164,6 @@
     if(['Delete','Backspace','Escape','r','R','w','a','s','d','x'].indexOf(e.key)<0)return;
     try{if(frame.contentWindow.__simKey&&frame.contentWindow.__simKey(e.key))e.preventDefault();}catch(err){}
   });
-  window.addEventListener('hashchange',function(){if(location.hash==='#simulator')showView('sim');});
-  if(location.hash==='#simulator')showView('sim');
+  window.addEventListener('hashchange',openFromHash);
+  openFromHash();
 })();

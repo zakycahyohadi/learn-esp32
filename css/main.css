@@ -266,6 +266,11 @@ ol.steps li p{margin:2px 0 0;color:var(--muted);font-size:14.5px}
 .pin-all summary::before{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
 .pin-all[open] summary::before{transform:rotate(45deg)}
 footer .wrap{text-align:center}
+/* link ke halaman panduan dan artikel */
+.guide-link{display:inline-block;margin-top:8px;font-weight:600;color:var(--accent);text-decoration:none}
+.guide-link:hover{text-decoration:underline}
+.more-link{margin:16px 0 0}
+.more-link a,.sec-head p a{color:var(--accent);font-weight:600}
 /* kritik & saran */
 .fb{max-width:760px;margin-inline:auto}
 .fb .sec-head{text-align:center;justify-items:center}
