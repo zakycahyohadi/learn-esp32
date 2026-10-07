@@ -646,10 +646,21 @@ function initExplorer(){
 
 /* ================= 2. CARA KERJA ================= */
 const WIFI_STEPS={
- sta:[[_L('Tersambung ke router','Join the router'),_L('ESP32 mencari nama WiFi dan login dengan password.','The ESP32 looks for the WiFi name and logs in with the password.')],[_L('Dapat alamat IP','Get an IP address'),_L('Router memberi alamat lewat DHCP, misalnya 192.168.1.23.','The router assigns an address over DHCP, for example 192.168.1.23.')],[_L('Kirim data ke internet','Send data to the internet'),_L('Data sensor dikirim lewat router ke server cloud (HTTP atau MQTT).','Sensor data travels through the router to a cloud server (HTTP or MQTT).')],[_L('HP menerima data','The phone receives it'),_L('Aplikasi di HP mengambil data dari cloud, dari mana saja.','An app on the phone pulls the data from the cloud, from anywhere.')]],
- ap:[[_L('ESP32 jadi hotspot','The ESP32 becomes a hotspot'),_L('ESP32 memancarkan WiFi sendiri bernama ESP32-AP.','The ESP32 broadcasts its own WiFi called ESP32-AP.')],[_L('HP tersambung ke ESP32-AP','The phone joins ESP32-AP'),_L('Tanpa router dan tanpa internet.','No router and no internet.')],[_L('HP membuka 192.168.4.1','The phone opens 192.168.4.1'),_L('Browser mengirim permintaan ke web server di ESP32.','The browser sends a request to the web server on the ESP32.')],[_L('ESP32 membalas halaman','The ESP32 replies with a page'),_L('Halaman kontrol tampil di HP.','The control page appears on the phone.')]]
+ sta:[[_L('Masuk ke WiFi rumah','Join your home WiFi'),_L('ESP32 login pakai nama dan password WiFi, sama seperti HP kamu.','The ESP32 logs in with the WiFi name and password, just like your phone.')],
+  [_L('Dapat alamat','Get an address'),_L('Router memberi ESP32 alamat, misalnya 192.168.1.23. Ibarat nomor rumah, supaya ESP32 bisa ditemukan.','The router gives the ESP32 an address, for example 192.168.1.23. Think of it as a house number, so the ESP32 can be found.')],
+  [_L('Kirim data ke internet','Send data to the internet'),_L('Misalnya angka suhu dari sensor, dikirim lewat router ke internet.','For example a temperature reading from a sensor, sent through the router to the internet.')],
+  [_L('Dilihat dari HP','Check it on your phone'),_L('Kamu bisa membuka datanya dari HP, di mana pun kamu berada.','You can open the data on your phone, wherever you are.')]],
+ ap:[[_L('ESP32 bikin WiFi sendiri','The ESP32 makes its own WiFi'),_L('ESP32 memancarkan WiFi bernama ESP32-AP, seperti hotspot di HP.','The ESP32 broadcasts a WiFi called ESP32-AP, like a phone hotspot.')],
+  [_L('HP masuk ke WiFi itu','Your phone joins it'),_L('Tidak perlu router, tidak perlu internet. Cocok untuk alat di luar rumah.','No router and no internet needed. Handy for gadgets away from home.')],
+  [_L('Buka 192.168.4.1 di browser','Open 192.168.4.1 in a browser'),_L('Itu alamat ESP32 di WiFi buatannya sendiri.','That is the ESP32\'s address on its own WiFi.')],
+  [_L('Halaman kontrol muncul','A control page appears'),_L('ESP32 mengirim halaman berisi tombol, misalnya untuk menyalakan lampu.','The ESP32 sends a page with buttons, for example to switch on a lamp.')]]
 };
-const WIFI_CODE={sta:_L('WiFi.begin("NAMA_WIFI", "PASSWORD");\nwhile (WiFi.status() != WL_CONNECTED) delay(500);\nSerial.println(WiFi.localIP());','WiFi.begin("WIFI_NAME", "PASSWORD");\nwhile (WiFi.status() != WL_CONNECTED) delay(500);\nSerial.println(WiFi.localIP());'),ap:'WiFi.softAP("ESP32-AP", "12345678");\nSerial.println(WiFi.softAPIP());  // 192.168.4.1'};
+const WIFI_CODE={
+ sta:_L('// 1. masuk ke WiFi rumah\nWiFi.begin("NAMA_WIFI", "PASSWORD");\n// 2. tunggu sampai tersambung\nwhile (WiFi.status() != WL_CONNECTED) delay(500);\n// 3. tampilkan alamat ESP32\nSerial.println(WiFi.localIP());',
+        '// 1. join your home WiFi\nWiFi.begin("WIFI_NAME", "PASSWORD");\n// 2. wait until connected\nwhile (WiFi.status() != WL_CONNECTED) delay(500);\n// 3. print the ESP32\'s address\nSerial.println(WiFi.localIP());'),
+ ap:_L('// bikin WiFi bernama ESP32-AP, password 12345678\nWiFi.softAP("ESP32-AP", "12345678");\n// tampilkan alamatnya: 192.168.4.1\nSerial.println(WiFi.softAPIP());',
+       '// make a WiFi called ESP32-AP, password 12345678\nWiFi.softAP("ESP32-AP", "12345678");\n// print its address: 192.168.4.1\nSerial.println(WiFi.softAPIP());')
+};
 function buildWifi(v){
   const G=new THREE.Group();v.scene.add(G);
   const b=makeESP32();b.group.position.set(-4.3,.74,1.1);b.group.rotation.y=.2;G.add(b.group);

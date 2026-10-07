@@ -163,15 +163,15 @@
       </div>
       <aside class="how-side">
         <div class="panel how-side" data-how-panel="wifi">
-          <h3>ESP32 bicara lewat WiFi</h3>
-          <p>Radio WiFi 2.4 GHz ada di dalam chip, dan antenanya adalah jalur zig-zag di ujung modul. Ada dua mode yang paling sering dipakai.</p>
+          <h3>ESP32 bisa pakai WiFi</h3>
+          <p>Seperti HP, ESP32 punya WiFi di dalamnya. Antenanya garis zig-zag emas di ujung board. Ada dua cara memakainya, pilih salah satu:</p>
           <div class="chips" id="wifiMode">
-            <button class="chip" data-mode="sta" aria-pressed="true">Station (STA)</button>
-            <button class="chip" data-mode="ap" aria-pressed="false">Access Point (AP)</button>
+            <button class="chip" data-mode="sta" aria-pressed="true">Numpang WiFi rumah (STA)</button>
+            <button class="chip" data-mode="ap" aria-pressed="false">Bikin WiFi sendiri (AP)</button>
           </div>
           <ol class="steps-live" id="wifiSteps"></ol>
           <pre class="mini-code" id="wifiCode"></pre>
-          <p class="note">ESP32 hanya bisa tersambung ke WiFi 2.4 GHz. Kalau router kamu dual-band, pastikan nama WiFi 2.4 GHz-nya aktif.</p>
+          <p class="note">ESP32 cuma bisa pakai WiFi 2.4 GHz. Kalau WiFi rumahmu punya dua nama, misalnya <b>RumahKu</b> dan <b>RumahKu_5G</b>, pilih yang tanpa 5G.</p>
         </div>
         <div class="panel how-side" data-how-panel="adc" hidden>
           <h3>ADC mengubah tegangan jadi angka</h3>

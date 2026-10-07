@@ -163,15 +163,15 @@
       </div>
       <aside class="how-side">
         <div class="panel how-side" data-how-panel="wifi">
-          <h3>How the ESP32 talks over WiFi</h3>
-          <p>The 2.4 GHz WiFi radio is inside the chip, and the antenna is the zig-zag trace at the end of the module. There are two modes you will use most.</p>
+          <h3>The ESP32 can use WiFi</h3>
+          <p>Just like a phone, the ESP32 has WiFi built in. The antenna is the gold zig-zag line at the end of the board. There are two ways to use it, pick one:</p>
           <div class="chips" id="wifiMode">
-            <button class="chip" data-mode="sta" aria-pressed="true">Station (STA)</button>
-            <button class="chip" data-mode="ap" aria-pressed="false">Access Point (AP)</button>
+            <button class="chip" data-mode="sta" aria-pressed="true">Join your home WiFi (STA)</button>
+            <button class="chip" data-mode="ap" aria-pressed="false">Make its own WiFi (AP)</button>
           </div>
           <ol class="steps-live" id="wifiSteps"></ol>
           <pre class="mini-code" id="wifiCode"></pre>
-          <p class="note">The ESP32 can only join 2.4 GHz WiFi. If your router is dual-band, make sure its 2.4 GHz network is enabled.</p>
+          <p class="note">The ESP32 only works with 2.4 GHz WiFi. If your home WiFi shows two names, for example <b>MyHome</b> and <b>MyHome_5G</b>, pick the one without 5G.</p>
         </div>
         <div class="panel how-side" data-how-panel="adc" hidden>
           <h3>The ADC turns voltage into a number</h3>
